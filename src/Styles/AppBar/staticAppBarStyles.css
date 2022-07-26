@@ -1,0 +1,23 @@
+.static-appbar {
+  background-color: #3297ab;
+  display: block;
+}
+.menu-option-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  flex-direction: row-reverse;
+}
+.appbar-typography {
+  font-family: Vazirmatn, sans-serif;
+  margin: 0px 10px 0px 10px;
+  direction: rtl;
+  color: #eeeeee;
+}
+.switch-class .MuiSwitch-thumb {
+  background-color: #1cd198;
+  /* color: "#fff"; */
+}
+.switch-class .Mui-checked + .MuiSwitch-track {
+  background-color: #eeeeee;
+}
