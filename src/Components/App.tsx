@@ -6,21 +6,23 @@ import "vazirmatn/Vazirmatn-font-face.css";
 import { Grid } from "@mui/material";
 import "../Styles/App/appStyles.css";
 import DarkModeContext from "./DarkModeContext";
-import { useState } from "react";
+import { useContext } from "react";
 
 export default function App() {
-  const theme = useState("light");
+  const [darkMode] = useContext(DarkModeContext);
+
   return (
     <BrowserRouter>
-      <DarkModeContext.Provider value={theme}>
-        <StaticAppBar />
-        <Grid id="main-container" container sx={{ marginTop: "80px" }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/uselessfacts" element={<UseLessFacts />} />
-          </Routes>
-        </Grid>
-      </DarkModeContext.Provider>
+      <StaticAppBar />
+      <Grid
+        container
+        className={"main-container " + (darkMode === "dark" ? "dark-mode" : "")}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/uselessfacts" element={<UseLessFacts />} />
+        </Routes>
+      </Grid>
     </BrowserRouter>
   );
 }

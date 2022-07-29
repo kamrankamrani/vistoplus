@@ -10,19 +10,29 @@ import "../Styles/UselessFacts/uselessFactsStyles.css";
 import ThumbUpOffAltRoundedIcon from "@mui/icons-material/ThumbUpOffAltRounded";
 import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import DarkModeContext from "./DarkModeContext";
+import { UselessApi } from "../Services/Api";
+import { UselessFactBaseUrl } from "../Info/Config";
+import { AxiosResponse } from "axios";
+import { UselessFactResponse } from "../Services/Types";
 
 export default function UseLessFacts() {
-  const [like, setLike] = React.useState(false);
+  const [like, setLike] = useState(false);
   const [dislike, setDislike] = React.useState(false);
-  const DefaultIconColor = "rgba(0, 0, 0, 0.54)";
+  const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
+  const [fact, setFact] = useState("");
+  const DefaultLightIconColor = "#f1f1f1";
   const [theme] = useContext(DarkModeContext);
 
   useEffect(() => {
-    console.log("theme is " + theme);
+    if (theme === "dark") {
+      setDefaulColor(DefaultLightIconColor);
+    } else {
+      setDefaulColor("rgba(0, 0, 0, 0.54)");
+    }
   }, [theme]);
 
   const handleLikeClick = () => {
@@ -35,34 +45,74 @@ export default function UseLessFacts() {
     if (like) setLike(false);
     setDislike(!dislike_);
   };
+  const handleApirequest = () => {
+    console.log("hiii");
+    UselessApi.get(UselessFactBaseUrl)
+      .then((response: AxiosResponse<"object">) => {
+        if (response.data && typeof response.data === "object") {
+          const responseData: UselessFactResponse = response.data;
+          console.log("response is ", responseData.text);
+          setFact(responseData.text);
+        } else {
+          console.log("response data type", typeof response.data);
+        }
+      })
+      .catch((error: string) => {
+        console.log("error is", error);
+      });
+  };
   return (
     <Grid xs={12} md={6} container className="app-container">
-      <Paper className="header-paper">
+      <Paper
+        className={"header-paper " + (theme === "dark" ? "dark-paper" : "")}
+      >
         <Typography variant="h6" className="header-text">
           حقایقی که ممکن است زندگی شما را متحول کند!
         </Typography>
       </Paper>
-      <Paper className="bottom-paper">
-        <Button className="ready-button">
-          <Typography className="ready-button-text">آمادگیشو داری؟</Typography>
-        </Button>
+      <Paper
+        className={"bottom-paper " + (theme === "dark" ? "dark-paper" : "")}
+      >
+        {!fact.length ? (
+          <Button
+            onClick={() => handleApirequest()}
+            className={
+              "ready-button " + (theme === "dark" ? "dark-button" : "")
+            }
+          >
+            <Typography className="ready-button-text">
+              آمادگیشو داری؟
+            </Typography>
+          </Button>
+        ) : (
+          <Typography variant="body2" className="response-text">
+            {fact}
+          </Typography>
+        )}
         <Grid container className="very-buttom-container">
           <Grid sx={{ flexGrow: 1 }}>
             <IconButton>
               <ThumbUpOffAltRoundedIcon
                 className="thumb-up-icon"
-                sx={{ color: like ? "#0f0" : DefaultIconColor }}
+                sx={{ color: like ? "#5BB318" : DefaultIconColor }}
                 onClick={handleLikeClick}
               />
             </IconButton>
             <IconButton>
               <ThumbDownAltRoundedIcon
-                sx={{ color: dislike ? "#f00" : DefaultIconColor }}
+                sx={{ color: dislike ? "#EB1D36" : DefaultIconColor }}
                 onClick={handleDisLikeClick}
               />
             </IconButton>
           </Grid>
-          <Button className="new-fact-button">
+          <Button
+            disabled={fact.length ? false : true}
+            className={
+              "new-fact-button " +
+              (theme === "dark" ? "dark-button " : "") +
+              (!fact.length ? "disable-button" : "")
+            }
+          >
             <Typography className="new-fact-text">فکت جدید!</Typography>
             <RefreshRoundedIcon sx={{ color: "#f1f1f1" }} />
           </Button>
@@ -70,13 +120,34 @@ export default function UseLessFacts() {
       </Paper>
       <Grid container className="share-link-container">
         <Tooltip title="share">
-          <Grid item className="round-button-container">
-            <ShareIcon sx={{ color: DefaultIconColor }} />
+          <Grid
+            item
+            className={
+              "round-button-container " + (theme === "dark" ? "dark-paper" : "")
+            }
+          >
+            <ShareIcon
+              sx={{
+                color:
+                  theme !== "dark" ? DefaultIconColor : DefaultLightIconColor,
+              }}
+            />
           </Grid>
         </Tooltip>
         <Tooltip title="copy link">
-          <Grid item className="round-button-container">
-            <LinkIcon sx={{ color: DefaultIconColor }} />
+          <Grid
+            item
+            className={
+              "round-button-container " + (theme === "dark" ? "dark-paper" : "")
+            }
+          >
+            <LinkIcon
+              className="link-icon"
+              sx={{
+                color:
+                  theme !== "dark" ? DefaultIconColor : DefaultLightIconColor,
+              }}
+            />
           </Grid>
         </Tooltip>
       </Grid>

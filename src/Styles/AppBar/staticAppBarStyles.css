@@ -1,6 +1,9 @@
 .static-appbar {
   background-color: #3297ab;
-  display: block;
+  position: sticky;
+}
+.dark-appbar {
+  background-color: #1f1b24;
 }
 .menu-option-container {
   display: flex;

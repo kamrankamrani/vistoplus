@@ -1,14 +1,12 @@
 .row-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   padding: 10px;
   row-gap: 10px;
   flex-direction: row-reverse;
 }
 .item-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 .paper {
@@ -109,6 +107,9 @@
   direction: rtl;
   color: #212121;
   margin-top: 10px;
+}
+.dark-captions {
+  color: #eeeeee;
 }
 .divider {
   border-top: 1px solid #bbb;

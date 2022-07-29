@@ -1,4 +1,9 @@
-#main-container {
+.main-container {
   display: flex;
   justify-content: center;
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
+}
+.dark-mode {
+  background-color: #121212;
 }

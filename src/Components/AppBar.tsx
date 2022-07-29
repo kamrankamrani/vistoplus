@@ -28,16 +28,14 @@ const StaticAppBar = () => {
     }
   }, [switchValue]);
 
-  // useEffect(() => {
-  //   console.log("theme is " + theme);
-  // }, [theme]);
-
   const handleSwitchClick = () => {
     setSwitchValue(!switchValue);
   };
 
   return (
-    <AppBar className="static-appbar">
+    <AppBar
+      className={"static-appbar " + (theme === "dark" ? "dark-appbar" : "")}
+    >
       <Toolbar>
         <Switch
           onClick={handleSwitchClick}
