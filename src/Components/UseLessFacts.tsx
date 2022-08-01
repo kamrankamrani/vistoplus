@@ -14,14 +14,16 @@ import React, { useContext, useEffect, useState } from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import DarkModeContext from "./DarkModeContext";
-import { UselessApi } from "../Services/Api";
-import { UselessFactBaseUrl } from "../Info/Config";
-import { AxiosResponse } from "axios";
-import { UselessFactResponse } from "../Services/Types";
+import { TranslateApi, UselessApi } from "../Services/Api";
+import { TranslateBaseUrl, UselessFactBaseUrl } from "../Info/Config";
+import axios, { AxiosResponse } from "axios";
+import { TranslateResponse, UselessFactResponse } from "../Services/Types";
+import LoadingComponent from "./LoadingComponent";
 
 export default function UseLessFacts() {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
   const [fact, setFact] = useState("");
   const DefaultLightIconColor = "#f1f1f1";
@@ -46,18 +48,42 @@ export default function UseLessFacts() {
     setDislike(!dislike_);
   };
   const handleApirequest = () => {
-    console.log("hiii");
+    setLoading(true);
     UselessApi.get(UselessFactBaseUrl)
       .then((response: AxiosResponse<"object">) => {
+        setLoading(false);
         if (response.data && typeof response.data === "object") {
           const responseData: UselessFactResponse = response.data;
-          console.log("response is ", responseData.text);
-          setFact(responseData.text);
+          console.log("original data is ", responseData.text);
+          // setFact(responseData.text);
+          axios
+            .get(
+              `https://api.mymemory.translated.net/get?q=${responseData.text}&langpair=en|fa`
+            )
+            .then((res: AxiosResponse<"object">) => {
+              if (res.data && typeof res.data === "object") {
+                const translatedData: TranslateResponse = res.data;
+                if (
+                  translatedData.responseData &&
+                  translatedData.responseData.translatedText
+                ) {
+                  console.log(
+                    "translate => ",
+                    translatedData.responseData.translatedText
+                  );
+                  setFact(translatedData.responseData.translatedText);
+                }
+              }
+            })
+            .catch((err) => {
+              console.log("translate error ", err);
+            });
         } else {
           console.log("response data type", typeof response.data);
         }
       })
       .catch((error: string) => {
+        setLoading(false);
         console.log("error is", error);
       });
   };
@@ -67,7 +93,7 @@ export default function UseLessFacts() {
         className={"header-paper " + (theme === "dark" ? "dark-paper" : "")}
       >
         <Typography variant="h6" className="header-text">
-          حقایقی که ممکن است زندگی شما را متحول کند!
+          حقایقی تصادفی که مطمئنا نمیدانستید!
         </Typography>
       </Paper>
       <Paper
@@ -77,12 +103,18 @@ export default function UseLessFacts() {
           <Button
             onClick={() => handleApirequest()}
             className={
-              "ready-button " + (theme === "dark" ? "dark-button" : "")
+              "ready-button " +
+              (theme === "dark" ? "dark-button " : "") +
+              (loading ? "disable-button" : "")
             }
           >
-            <Typography className="ready-button-text">
-              آمادگیشو داری؟
-            </Typography>
+            {!loading ? (
+              <Typography className="ready-button-text">
+                آمادگیشو داری؟
+              </Typography>
+            ) : (
+              <LoadingComponent />
+            )}
           </Button>
         ) : (
           <Typography variant="body2" className="response-text">
@@ -106,6 +138,7 @@ export default function UseLessFacts() {
             </IconButton>
           </Grid>
           <Button
+            onClick={() => handleApirequest()}
             disabled={fact.length ? false : true}
             className={
               "new-fact-button " +
@@ -113,8 +146,12 @@ export default function UseLessFacts() {
               (!fact.length ? "disable-button" : "")
             }
           >
-            <Typography className="new-fact-text">فکت جدید!</Typography>
-            <RefreshRoundedIcon sx={{ color: "#f1f1f1" }} />
+            {!loading ? (
+              <Typography className="new-fact-text">فکت جدید!</Typography>
+            ) : (
+              <LoadingComponent />
+            )}
+            {/* <RefreshRoundedIcon sx={{ color: "#f1f1f1" }} /> */}
           </Button>
         </Grid>
       </Paper>

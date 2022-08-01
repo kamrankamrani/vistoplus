@@ -49,6 +49,9 @@
   background-color: #3fb3bc;
   border-radius: 5px;
   margin: 20px 0px 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ready-button:hover {

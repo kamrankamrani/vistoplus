@@ -6,3 +6,9 @@ export interface UselessFactResponse {
     permalink?: string,
     language?: string
 }
+
+export interface TranslateResponse {
+    responseData?: {
+        translatedText?: string
+    }
+}
