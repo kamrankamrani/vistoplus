@@ -19,6 +19,7 @@ import { TranslateBaseUrl, UselessFactBaseUrl } from "../Info/Config";
 import axios, { AxiosResponse } from "axios";
 import { TranslateResponse, UselessFactResponse } from "../Services/Types";
 import LoadingComponent from "./LoadingComponent";
+import LangSelect from "./LangSelect";
 
 export default function UseLessFacts() {
   const [like, setLike] = useState(false);
@@ -27,6 +28,7 @@ export default function UseLessFacts() {
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
   const [fact, setFact] = useState("");
   const DefaultLightIconColor = "#f1f1f1";
+  const [lang, setLang] = useState("fa");
   const [theme] = useContext(DarkModeContext);
 
   useEffect(() => {
@@ -122,7 +124,7 @@ export default function UseLessFacts() {
           </Typography>
         )}
         <Grid container className="very-buttom-container">
-          <Grid sx={{ flexGrow: 1 }}>
+          {/* <Grid sx={{ flexGrow: 1 }}>
             <IconButton>
               <ThumbUpOffAltRoundedIcon
                 className="thumb-up-icon"
@@ -136,6 +138,9 @@ export default function UseLessFacts() {
                 onClick={handleDisLikeClick}
               />
             </IconButton>
+          </Grid> */}
+          <Grid item style={{ flexGrow: 1 }}>
+            <LangSelect setLang={setLang} />
           </Grid>
           <Button
             onClick={() => handleApirequest()}
@@ -151,7 +156,6 @@ export default function UseLessFacts() {
             ) : (
               <LoadingComponent />
             )}
-            {/* <RefreshRoundedIcon sx={{ color: "#f1f1f1" }} /> */}
           </Button>
         </Grid>
       </Paper>
