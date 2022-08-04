@@ -7,6 +7,7 @@ import { Grid } from "@mui/material";
 import "../Styles/App/appStyles.css";
 import DarkModeContext from "./DarkModeContext";
 import { useContext } from "react";
+import BottomBar from "./BottomBar";
 
 export default function App() {
   const [darkMode] = useContext(DarkModeContext);
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/uselessfacts" element={<UseLessFacts />} />
         </Routes>
+        <BottomBar />
       </Grid>
     </BrowserRouter>
   );

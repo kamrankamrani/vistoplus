@@ -1,4 +1,4 @@
-.container {
+.lang-container {
   display: flex;
   position: relative;
   flex-grow: 1;
@@ -29,5 +29,17 @@
 }
 
 .selected {
-  background-color: #3fb3bc;
+  background-color: #78909c;
+}
+
+.selected:hover {
+  background-color: #8aa6b4;
+}
+
+.dark-selected {
+  background-color: #bb86fc;
+}
+
+.dark-selected:hover {
+  background-color: #c395fc;
 }

@@ -46,7 +46,7 @@
 }
 
 .ready-button {
-  background-color: #3fb3bc;
+  background-color: #78909c;
   border-radius: 5px;
   margin: 20px 0px 20px 0px;
   display: flex;
@@ -55,19 +55,15 @@
 }
 
 .ready-button:hover {
-  background-color: #3fb3bc;
+  background-color: #78909c;
 }
 
 .new-fact-button {
-  background-color: #61acd8;
+  background-color: #78909c;
 }
 
 .new-fact-button:hover {
   background-color: #a6c8db;
-}
-
-.thumb-up-icon {
-  margin-right: 10px;
 }
 
 .new-fact-text {
@@ -82,7 +78,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  /* border-top: 1px solid #212121; */
+  margin-top: 20px;
 }
 
 .share-link-container {
@@ -109,10 +105,14 @@
 }
 
 .response-text {
-  direction: rtl;
+  /* direction: rtl; */
   font-family: Vazirmatn, sans-serif;
   font-size: 18px;
   color: inherit;
+}
+
+.rtl-direction {
+  direction: rtl;
 }
 
 .disable-button {
@@ -129,5 +129,5 @@
 }
 
 .dark-button:hover {
-  background-color: #bb86fc;
+  background-color: #c395fc;
 }

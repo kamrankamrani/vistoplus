@@ -1,32 +1,21 @@
-import {
-  Button,
-  Grid,
-  IconButton,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import "../Styles/UselessFacts/uselessFactsStyles.css";
-import ThumbUpOffAltRoundedIcon from "@mui/icons-material/ThumbUpOffAltRounded";
-import ThumbDownAltRoundedIcon from "@mui/icons-material/ThumbDownAltRounded";
-import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
 import React, { useContext, useEffect, useState } from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import DarkModeContext from "./DarkModeContext";
-import { TranslateApi, UselessApi } from "../Services/Api";
-import { TranslateBaseUrl, UselessFactBaseUrl } from "../Info/Config";
+import { UselessApi } from "../Services/Api";
+import { UselessFactBaseUrl } from "../Info/Config";
 import axios, { AxiosResponse } from "axios";
 import { TranslateResponse, UselessFactResponse } from "../Services/Types";
 import LoadingComponent from "./LoadingComponent";
 import LangSelect from "./LangSelect";
 
 export default function UseLessFacts() {
-  const [like, setLike] = useState(false);
-  const [dislike, setDislike] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
   const [fact, setFact] = useState("");
+  const [EnFact, setEnFact] = useState("");
   const DefaultLightIconColor = "#f1f1f1";
   const [lang, setLang] = useState("fa");
   const [theme] = useContext(DarkModeContext);
@@ -39,30 +28,21 @@ export default function UseLessFacts() {
     }
   }, [theme]);
 
-  const handleLikeClick = () => {
-    const like_: boolean = like;
-    if (dislike) setDislike(false);
-    setLike(!like_);
-  };
-  const handleDisLikeClick = () => {
-    const dislike_: boolean = dislike;
-    if (like) setLike(false);
-    setDislike(!dislike_);
-  };
   const handleApirequest = () => {
     setLoading(true);
     UselessApi.get(UselessFactBaseUrl)
       .then((response: AxiosResponse<"object">) => {
-        setLoading(false);
+        // setLoading(false);
         if (response.data && typeof response.data === "object") {
           const responseData: UselessFactResponse = response.data;
           console.log("original data is ", responseData.text);
-          // setFact(responseData.text);
+          setEnFact(responseData.text);
           axios
             .get(
               `https://api.mymemory.translated.net/get?q=${responseData.text}&langpair=en|fa`
             )
             .then((res: AxiosResponse<"object">) => {
+              setLoading(false);
               if (res.data && typeof res.data === "object") {
                 const translatedData: TranslateResponse = res.data;
                 if (
@@ -78,9 +58,11 @@ export default function UseLessFacts() {
               }
             })
             .catch((err) => {
+              setLoading(false);
               console.log("translate error ", err);
             });
         } else {
+          setLoading(false);
           console.log("response data type", typeof response.data);
         }
       })
@@ -119,26 +101,16 @@ export default function UseLessFacts() {
             )}
           </Button>
         ) : (
-          <Typography variant="body2" className="response-text">
-            {fact}
+          <Typography
+            variant="body2"
+            className={
+              "response-text " + (lang === "fa" ? "rtl-direction" : "")
+            }
+          >
+            {lang === "en" ? EnFact : fact}
           </Typography>
         )}
         <Grid container className="very-buttom-container">
-          {/* <Grid sx={{ flexGrow: 1 }}>
-            <IconButton>
-              <ThumbUpOffAltRoundedIcon
-                className="thumb-up-icon"
-                sx={{ color: like ? "#5BB318" : DefaultIconColor }}
-                onClick={handleLikeClick}
-              />
-            </IconButton>
-            <IconButton>
-              <ThumbDownAltRoundedIcon
-                sx={{ color: dislike ? "#EB1D36" : DefaultIconColor }}
-                onClick={handleDisLikeClick}
-              />
-            </IconButton>
-          </Grid> */}
           <Grid item style={{ flexGrow: 1 }}>
             <LangSelect setLang={setLang} />
           </Grid>

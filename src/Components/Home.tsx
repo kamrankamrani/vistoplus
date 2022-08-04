@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/Home/home.css";
 import DarkModeContext from "./DarkModeContext";
 import IS_smScreen from "./Screen";
+import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
+import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
+import ThermostatRoundedIcon from "@mui/icons-material/ThermostatRounded";
 
 export default function Home() {
   const isSmScreen = useContext(IS_smScreen());
@@ -30,7 +33,10 @@ export default function Home() {
             onClick={() => handleItemClick("uselessitem")}
             className="paper"
           >
-            <div className="useless-facts" />
+            {/* <div className="useless-facts" /> */}
+            <Grid className="useless-facts">
+              <TipsAndUpdatesRoundedIcon sx={{ fontSize: "50px" }} />
+            </Grid>
             <Typography variant="h5">رندوم فکت!</Typography>
           </Paper>
           {!isSmScreen && (
@@ -49,7 +55,10 @@ export default function Home() {
             onClick={() => handleItemClick("onlineconsult")}
             className="paper"
           >
-            <div className="online-consultant" />
+            {/* <div className="online-consultant" /> */}
+            <Grid className="online-consultant">
+              <SupportAgentRoundedIcon sx={{ fontSize: "50px" }} />
+            </Grid>
             <Typography variant="h5">مشاور آنلاین آبیاری</Typography>
           </Paper>
           {!isSmScreen && (
@@ -68,7 +77,10 @@ export default function Home() {
             onClick={() => handleItemClick("weather")}
             className="weather-paper"
           >
-            <div className="weather" />
+            {/* <div className="weather" /> */}
+            <Grid className="weather">
+              <ThermostatRoundedIcon sx={{ fontSize: "50px" }} />
+            </Grid>
             <Typography variant="h5">وضعیت آب و هوا</Typography>
           </Paper>
           {!isSmScreen && (

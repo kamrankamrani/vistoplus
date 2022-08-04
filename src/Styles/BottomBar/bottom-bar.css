@@ -1,0 +1,28 @@
+.bottom-container {
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  padding: 10px 20px 10px 20px;
+}
+
+.back-button {
+  background-color: #78909c;
+  color: #f1f1f1;
+}
+
+.back-button:hover {
+  background-color: #8aa6b4;
+}
+
+.back-button-dark {
+  background-color: #bb86fc;
+  color: #f1f1f1;
+}
+
+.back-button-dark:hover {
+  background-color: #c395fc;
+}
+
+.button-text {
+  color: inherit;
+}

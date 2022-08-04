@@ -46,16 +46,19 @@
   width: 150px;
   height: 150px;
   background-color: #ff2c40;
-  background-image: url("../../../public/svg/lightBulb.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url("../../../public/svg/lightBulb.svg");
   background-repeat: no-repeat;
   background-size: 60%;
-  background-position: center;
+  background-position: center; */
   transition: background-size 0.2s ease;
 }
 .paper:hover .useless-facts {
   -webkit-filter: blur(4px);
   filter: blur(4px);
-  background-size: 90%;
+  /* background-size: 90%; */
 }
 .paper:hover .online-consultant {
   -webkit-filter: blur(4px);
@@ -121,11 +124,14 @@
   border-radius: 10px;
   width: 150px;
   height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #8b45c5;
-  background-image: url("../../../public/svg/cleverBook.svg");
+  /* background-image: url("../../../public/svg/cleverBook.svg");
   background-repeat: no-repeat;
   background-size: 70%;
-  background-position: center;
+  background-position: center;  */
   transition: background-size 0.2s ease;
 }
 .weather {
@@ -133,9 +139,12 @@
   width: 150px;
   height: 150px;
   background-color: #05668d;
-  background-image: url("../../../public/svg/cuteCloud.svg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-image: url("../../../public/svg/cuteCloud.svg");
   background-repeat: no-repeat;
   background-size: 70%;
-  background-position: center;
+  background-position: center; */
   transition: background-size 0.2s ease;
 }
