@@ -1,0 +1,17 @@
+.dots-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  margin-top: 10px;
+}
+
+.dots-item {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #bebebe;
+}
+
+.selected-dot {
+  background-color: #212121;
+}

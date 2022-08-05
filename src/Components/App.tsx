@@ -8,6 +8,7 @@ import "../Styles/App/appStyles.css";
 import DarkModeContext from "./DarkModeContext";
 import { useContext } from "react";
 import BottomBar from "./BottomBar";
+import OnlineConsult from "./OnlineConsult";
 
 export default function App() {
   const [darkMode] = useContext(DarkModeContext);
@@ -22,6 +23,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/uselessfacts" element={<UseLessFacts />} />
+          <Route path="/onlineconsult" element={<OnlineConsult />} />
         </Routes>
         <BottomBar />
       </Grid>

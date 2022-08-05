@@ -17,7 +17,7 @@ export default function Home() {
     if (element === "uselessitem") {
       navigate("/uselessfacts");
     } else if (element === "onlineconsult") {
-      navigate("/#");
+      navigate("/onlineconsult");
     } else if (element === "weather") {
       navigate("/#");
     } else {
@@ -33,9 +33,17 @@ export default function Home() {
             onClick={() => handleItemClick("uselessitem")}
             className="paper"
           >
-            {/* <div className="useless-facts" /> */}
-            <Grid className="useless-facts">
-              <TipsAndUpdatesRoundedIcon sx={{ fontSize: "50px" }} />
+            <Grid
+              className={
+                "useless-facts " +
+                (theme === "dark" ? "dark-item-container" : "")
+              }
+            >
+              <TipsAndUpdatesRoundedIcon
+                className={
+                  "light-icon " + (theme === "dark" ? "dark-icon" : "")
+                }
+              />
             </Grid>
             <Typography variant="h5">رندوم فکت!</Typography>
           </Paper>
@@ -55,9 +63,17 @@ export default function Home() {
             onClick={() => handleItemClick("onlineconsult")}
             className="paper"
           >
-            {/* <div className="online-consultant" /> */}
-            <Grid className="online-consultant">
-              <SupportAgentRoundedIcon sx={{ fontSize: "50px" }} />
+            <Grid
+              className={
+                "online-consultant " +
+                (theme === "dark" ? "dark-item-container" : "")
+              }
+            >
+              <SupportAgentRoundedIcon
+                className={
+                  "light-icon " + (theme === "dark" ? "dark-icon" : "")
+                }
+              />
             </Grid>
             <Typography variant="h5">مشاور آنلاین آبیاری</Typography>
           </Paper>
@@ -73,13 +89,17 @@ export default function Home() {
           )}
         </Grid>
         <Grid item xs={6} sm={4} className="item-container">
-          <Paper
-            onClick={() => handleItemClick("weather")}
-            className="weather-paper"
-          >
-            {/* <div className="weather" /> */}
-            <Grid className="weather">
-              <ThermostatRoundedIcon sx={{ fontSize: "50px" }} />
+          <Paper onClick={() => handleItemClick("weather")} className="paper">
+            <Grid
+              className={
+                "weather " + (theme === "dark" ? "dark-item-container" : "")
+              }
+            >
+              <ThermostatRoundedIcon
+                className={
+                  "light-icon " + (theme === "dark" ? "dark-icon" : "")
+                }
+              />
             </Grid>
             <Typography variant="h5">وضعیت آب و هوا</Typography>
           </Paper>

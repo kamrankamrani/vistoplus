@@ -45,30 +45,24 @@
   border-radius: 10px;
   width: 150px;
   height: 150px;
-  background-color: #ff2c40;
+  background-color: #b0bec5;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-image: url("../../../public/svg/lightBulb.svg");
-  background-repeat: no-repeat;
-  background-size: 60%;
-  background-position: center; */
   transition: background-size 0.2s ease;
 }
 .paper:hover .useless-facts {
   -webkit-filter: blur(4px);
   filter: blur(4px);
-  /* background-size: 90%; */
 }
 .paper:hover .online-consultant {
   -webkit-filter: blur(4px);
   filter: blur(4px);
   background-size: 100%;
 }
-.weather-paper:hover .weather {
+.paper:hover .weather {
   -webkit-filter: blur(4px);
   filter: blur(4px);
-  background-size: 100%;
 }
 .paper > h5 {
   position: absolute;
@@ -86,22 +80,7 @@
 .paper:hover h5 {
   display: block;
 }
-.weather-paper > h5 {
-  position: absolute;
-  top: 40%;
-  display: none;
-  color: #212529;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 9999999;
-  text-align: center;
-  transition: 0.2s ease;
-  font-family: Vazirmatn, sans-serif;
-  direction: rtl;
-}
-.weather-paper:hover h5 {
-  display: block;
-}
+
 .mobilie-captions {
   align-self: center;
   font-family: Vazirmatn, sans-serif;
@@ -112,7 +91,7 @@
   margin-top: 10px;
 }
 .dark-captions {
-  color: #eeeeee;
+  color: #e0e0e0;
 }
 .divider {
   border-top: 1px solid #bbb;
@@ -127,24 +106,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #8b45c5;
-  /* background-image: url("../../../public/svg/cleverBook.svg");
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: center;  */
+  background-color: #b0bec5;
   transition: background-size 0.2s ease;
 }
 .weather {
   border-radius: 10px;
   width: 150px;
   height: 150px;
-  background-color: #05668d;
+  background-color: #b0bec5;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-image: url("../../../public/svg/cuteCloud.svg");
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: center; */
   transition: background-size 0.2s ease;
+}
+.dark-item-container {
+  background-color: #bb86fc;
+}
+.light-icon {
+  color: #424242;
+  font-size: 50px;
+}
+.dark-icon {
+  color: #eeeeee;
 }
