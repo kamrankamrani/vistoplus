@@ -36,7 +36,7 @@ export default function DotsProgress(Props: IProps) {
     for (let i = 0; i < dotsNumber; i++) {
       arr.push(
         <Grid
-          className="dots-item"
+          className={"dots-item " + (i === 0 ? "selected-dot" : "")}
           item
           id={"dots-" + String(i)}
           key={i}

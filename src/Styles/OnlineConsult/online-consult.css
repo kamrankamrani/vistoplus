@@ -57,7 +57,7 @@
   display: flex;
   justify-content: center;
   padding: 20px 10px 20px 10px;
-  min-height: 200px;
+  min-height: 100px;
 }
 
 .more-info-container {
@@ -105,4 +105,5 @@
 
 .button-text {
   font-family: Vazirmatn, sans-serif;
+  direction: rtl;
 }
