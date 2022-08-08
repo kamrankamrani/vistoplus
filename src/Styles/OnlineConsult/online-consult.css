@@ -76,6 +76,24 @@
   color: inherit;
 }
 
+.small-chip-text {
+  font-family: Vazirmatn, sans-serif;
+  color: inherit;
+  font-size: 14px;
+}
+
+.divider {
+  background-color: #eeeeee;
+}
+
+.small-divider {
+  background-color: #eeeeee;
+  width: 80%;
+  display: flex;
+  align-self: center;
+  margin: 5px 0px 5px 0px;
+}
+
 .chip:hover {
   background-color: #f08568;
 }
@@ -106,4 +124,76 @@
 .button-text {
   font-family: Vazirmatn, sans-serif;
   direction: rtl;
+  font-size: 16px;
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 10px 20px 10px;
+  min-height: 100px;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.result-choices-chips-container {
+  display: flex;
+  justify-content: flex-end;
+  row-gap: 5px;
+  column-gap: 10px;
+}
+
+.result-body-container {
+  display: flex;
+  justify-content: center;
+}
+
+.result-body-text {
+  font-family: Vazirmatn, sans-serif;
+  direction: rtl;
+  color: inherit;
+  font-size: 16px;
+}
+
+.result-extra-option-text {
+  font-family: Vazirmatn, sans-serif;
+  direction: rtl;
+  color: inherit;
+  font-size: 14px;
+}
+
+.dark-paper {
+  background-color: #3f4e4f;
+  color: #f1f1f1;
+}
+
+.dark-form-header {
+  background-color: #302a36;
+}
+
+.dark-chip {
+  background-color: #302a36;
+  color: #eeeeee;
+}
+
+.dark-chip:hover {
+  background-color: #27222c;
+}
+
+.dark-icon-button {
+  color: #f1f1f1;
+  background-color: #3f4e4f;
+}
+
+.dark-icon-button:hover {
+  background-color: #323e3f;
+}
+
+.dark-button {
+  background-color: #bb86fc;
+  color: #f1f1f1;
+}
+
+.dark-button:hover {
+  background-color: #c395fc;
 }

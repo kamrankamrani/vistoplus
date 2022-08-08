@@ -3,6 +3,7 @@
   justify-content: center;
   column-gap: 5px;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .dots-item {
@@ -13,5 +14,5 @@
 }
 
 .selected-dot {
-  background-color: #212121;
+  background-color: #464646;
 }

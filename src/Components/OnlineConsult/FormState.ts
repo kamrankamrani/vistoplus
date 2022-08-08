@@ -39,7 +39,7 @@ const FormState = {
         renderObj.upButtonText = "پمپ آب ( کفکش، دیواری و...)";
         renderObj.downButtonText = "آب شهری / منبع آب";
         renderObj.moreInfoBody = "";
-        renderObj.isMoreInfoDisable = false;
+        renderObj.isMoreInfoDisable = true;
         renderObj.state = this.state;
         break;
       case 2:

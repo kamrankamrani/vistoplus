@@ -49,3 +49,17 @@
   font-family: Vazirmatn, sans-serif;
   color: inherit;
 }
+
+.dark-info-dialog-paper {
+  background-color: #3f4e4f;
+  color: #f1f1f1;
+}
+
+.dark-info-dialog-button {
+  background-color: #bb86fc;
+  color: #f1f1f1;
+}
+
+.dark-info-dialog-button:hover {
+  background-color: #c395fc;
+}

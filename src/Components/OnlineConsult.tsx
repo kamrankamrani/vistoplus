@@ -9,7 +9,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoDialog from "./InfoDialog";
 import "../Styles/OnlineConsult/online-consult.css";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import DotsProgress from "./OnlineConsult/DotsProgress";
 import FormState, {
   OnlineConsultFromDateType,
@@ -18,6 +18,7 @@ import ResponseOnlineConsultForm, {
   returnResultData,
 } from "./OnlineConsult/ResonseForm";
 import ConsultResult from "./OnlineConsult/ConsultResult";
+import DarkModeContext from "./DarkModeContext";
 const MAX_FROM_STEP = 4; //start from zero
 
 export default function OnlineConsult() {
@@ -25,6 +26,7 @@ export default function OnlineConsult() {
   const [formData, setFormData] = useState({} as OnlineConsultFromDateType);
   const [hideResult, setHideResult] = useState(true);
   const [formResult, setFromResult] = useState({} as returnResultData);
+  const [theme] = useContext(DarkModeContext);
 
   const handleOpenDialog = () => {
     setOpenDialog(true);
@@ -32,6 +34,7 @@ export default function OnlineConsult() {
 
   useEffect(() => {
     FormState.maxState = MAX_FROM_STEP;
+    FormState.state = 0;
     setFormData(FormState.renderData());
   }, []);
 
@@ -41,9 +44,14 @@ export default function OnlineConsult() {
   };
 
   const handleResultConsultClick = () => {
-    setHideResult(false);
-    // console.log("result ", ResponseOnlineConsultForm.computeResult());
-    setFromResult(ResponseOnlineConsultForm.computeResult());
+    if (hideResult) {
+      setHideResult(false);
+      setFromResult(ResponseOnlineConsultForm.computeResult());
+    } else {
+      setHideResult(true);
+      FormState.state = 0;
+      setFormData(FormState.renderData());
+    }
   };
 
   const handleAnswerClick = (input: "up" | "down") => {
@@ -87,9 +95,17 @@ export default function OnlineConsult() {
   return (
     <Grid container className="online-consult-container">
       <Grid item xs={12} md={6} className="online-consult-paper-container">
-        <Paper className="form-paper">
+        <Paper
+          className={"form-paper " + (theme === "dark" ? "dark-paper" : "")}
+        >
           <Grid container>
-            <Grid item xs={12} className="form-header">
+            <Grid
+              item
+              xs={12}
+              className={
+                "form-header " + (theme === "dark" ? "dark-form-header" : "")
+              }
+            >
               <Typography className="header-text" variant="body1">
                 مشاور آنلاین!
               </Typography>
@@ -98,7 +114,10 @@ export default function OnlineConsult() {
                   <IconButton
                     size="small"
                     onClick={handleFormStepBack}
-                    className="icon-button"
+                    className={
+                      "icon-button " +
+                      (theme === "dark" ? "dark-icon-button" : "")
+                    }
                   >
                     <ArrowBackIcon />
                   </IconButton>
@@ -113,12 +132,14 @@ export default function OnlineConsult() {
               ) : (
                 <Grid item>
                   <Button
-                    disabled={!hideResult}
+                    // disabled={!hideResult}
                     onClick={handleResultConsultClick}
-                    className="form-button"
+                    className={
+                      "form-button " + (theme === "dark" ? "dark-button" : "")
+                    }
                   >
                     <Typography className="button-text">
-                      مشاهده نتیجه مشاوره!
+                      {!hideResult ? "مشاوره مجدد!" : "مشاهده نتیجه مشاوره!"}
                     </Typography>
                   </Button>
                 </Grid>
@@ -128,6 +149,7 @@ export default function OnlineConsult() {
               <ConsultResult
                 mainBody={formResult.mainBody}
                 extraOptions={formResult.extraOptions}
+                choices={formResult.choices}
               />
             ) : null}
             {formData.state !== MAX_FROM_STEP ? (
@@ -136,7 +158,7 @@ export default function OnlineConsult() {
                   <Chip
                     disabled={formData.isMoreInfoDisable}
                     onClick={handleOpenDialog}
-                    className="chip"
+                    className={"chip " + (theme === "dark" ? "dark-chip" : "")}
                     label={
                       <Typography variant="caption" className="chip-text">
                         اطلاعات بیشتر
@@ -147,7 +169,9 @@ export default function OnlineConsult() {
                 <Grid item xs={12} className="form-answer-container">
                   <Button
                     onClick={() => handleAnswerClick("up")}
-                    className="form-button"
+                    className={
+                      "form-button " + (theme === "dark" ? "dark-button" : "")
+                    }
                   >
                     <Typography className="button-text">
                       {formData.upButtonText}
@@ -155,7 +179,9 @@ export default function OnlineConsult() {
                   </Button>
                   <Button
                     onClick={() => handleAnswerClick("down")}
-                    className="form-button"
+                    className={
+                      "form-button " + (theme === "dark" ? "dark-button" : "")
+                    }
                   >
                     <Typography className="button-text">
                       {formData.downButtonText}
