@@ -1,0 +1,44 @@
+.weather-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather-row-container {
+  display: flex;
+}
+.paper-container {
+  display: flex;
+  padding: 10px;
+}
+.paper {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
+  width: 100%;
+  display: flex;
+}
+.temp-paper {
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 10px;
+}
+.temp-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.city-button-container {
+  display: flex;
+  justify-content: center;
+}
+.text {
+  font-family: Vazirmatn, sans-serif;
+  color: inherit;
+}
+.city-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+.city-button-text {
+}

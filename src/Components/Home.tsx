@@ -19,9 +19,9 @@ export default function Home() {
     } else if (element === "onlineconsult") {
       navigate("/onlineconsult");
     } else if (element === "weather") {
-      navigate("/#");
+      navigate("/weather");
     } else {
-      navigate("/#");
+      navigate("/");
     }
   };
 

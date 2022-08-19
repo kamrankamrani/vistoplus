@@ -1,9 +1,12 @@
 .main-container {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 56px);
-  overflow-y: scroll;
+  height: calc(100vh - 64px);
+  overflow-y: hidden;
   padding-top: 20px;
+}
+.main-container-mobile {
+  height: calc(100vh - 56px);
 }
 .dark-mode {
   background-color: #121212;
