@@ -6,11 +6,11 @@
 .weather-row-container {
   display: flex;
 }
-.paper-container {
+.wheather-paper-container {
   display: flex;
   padding: 10px;
 }
-.paper {
+.weather-paper {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
   width: 100%;
   display: flex;

@@ -74,8 +74,8 @@ export default function Weather() {
   return (
     <Grid container className="weather-container">
       <Grid container className="weather-row-container">
-        <Grid item xs={6} md={2} className="paper-container">
-          <Paper className="paper temp-paper">
+        <Grid item xs={6} md={2} className="weather-paper-container">
+          <Paper className="weather-paper temp-paper">
             <Grid container className="temp-display">
               <Typography>25&deg;</Typography>
               <Typography variant="caption">C</Typography>
@@ -91,13 +91,13 @@ export default function Weather() {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={8} className="paper-container">
-          <Paper className="paper">
+        <Grid item xs={12} md={8} className="weather-paper-container">
+          <Paper className="weather-paper">
             <Typography>days</Typography>
           </Paper>
         </Grid>
-        <Grid item xs={6} md={2} className="paper-container">
-          <Paper className="paper">
+        <Grid item xs={6} md={2} className="weather-paper-container">
+          <Paper className="weather-paper">
             <Typography>quality</Typography>
           </Paper>
         </Grid>

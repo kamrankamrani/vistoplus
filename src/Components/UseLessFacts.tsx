@@ -10,15 +10,20 @@ import axios, { AxiosResponse } from "axios";
 import { TranslateResponse, UselessFactResponse } from "../Services/Types";
 import LoadingComponent from "./LoadingComponent";
 import LangSelect from "./LangSelect";
+import type { RootState } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { setPersianValue } from "./reducers/uselessFactSlice";
 
 export default function UseLessFacts() {
   const [loading, setLoading] = React.useState(false);
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
-  const [fact, setFact] = useState("");
+  // const [fact, setFact] = useState("");
+  const fact = useSelector((state: RootState) => state.persianFact.value);
   const [EnFact, setEnFact] = useState("");
   const DefaultLightIconColor = "#f1f1f1";
   const [lang, setLang] = useState("fa");
   const [theme] = useContext(DarkModeContext);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (theme === "dark") {
@@ -53,7 +58,9 @@ export default function UseLessFacts() {
                     "translate => ",
                     translatedData.responseData.translatedText
                   );
-                  setFact(translatedData.responseData.translatedText);
+                  dispatch(
+                    setPersianValue(translatedData.responseData.translatedText)
+                  );
                 }
               }
             })
