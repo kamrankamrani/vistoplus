@@ -1,0 +1,66 @@
+.chart-container {
+  width: 100%;
+  padding: 20px 30px 20px 30px;
+}
+
+.chart-sun-icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chart-moon-icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart-wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-height: 50px;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  margin: 5px 0px 5px 0px;
+}
+
+.icons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  min-height: 50px;
+}
+
+.single-icon-wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-wrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  height: 10px;
+  width: 10px;
+  border: 2px solid #555;
+  background-color: transparent;
+  border-radius: 50%;
+  position: relative;
+}
+
+.tooltip-container {
+  background-color: #faf9f9;
+  padding: 5px;
+  border-radius: 10px;
+  border: #555 solid 1px;
+}
+
+.tooltip {
+  color: brown;
+  background-color: #eeeeee;
+}

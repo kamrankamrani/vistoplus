@@ -9,11 +9,15 @@ import {
   DailyForeCastResponse,
   GeoCodingResponse,
 } from "../Services/Types";
+import Chart from "./weather/Chart";
 
 export default function Weather() {
   const [LAT, setLat] = useState("35.6892523");
   const [LON, setLon] = useState("51.3896004");
   const [City, setCity] = useState("Tehran");
+  const [dailyForecast, setDailyForecast] = useState(
+    {} as DailyForeCastResponse
+  );
 
   const getGeoCode = (city_ = "Tehran") => {
     axios
@@ -57,6 +61,7 @@ export default function Weather() {
       )
       .then((response: AxiosResponse<"object">) => {
         if (response.data && typeof response.data === "object") {
+          setDailyForecast(response.data);
           const DailyForeCastRes: DailyForeCastResponse = response.data;
           console.log("forecast is ", DailyForeCastRes);
         }
@@ -93,7 +98,7 @@ export default function Weather() {
         </Grid>
         <Grid item xs={12} md={8} className="weather-paper-container">
           <Paper className="weather-paper">
-            <Typography>days</Typography>
+            <Chart dailyForecast={dailyForecast} />
           </Paper>
         </Grid>
         <Grid item xs={6} md={2} className="weather-paper-container">
