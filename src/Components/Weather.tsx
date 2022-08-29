@@ -9,7 +9,7 @@ import {
   DailyForeCastResponse,
   GeoCodingResponse,
 } from "../Services/Types";
-import Chart from "./weather/Chart";
+import Chart from "./PrivateComponents/weather/Chart";
 
 export default function Weather() {
   const [LAT, setLat] = useState("35.6892523");

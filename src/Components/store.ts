@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import persianFactReducer from "./reducers/uselessFactSlice";
+import uselessFactReducer from "./featuers/uselessFactSlice";
 // import uselessFactReducer from "./reducers/uselessFactSlice";
 
 const store = configureStore({
   reducer: {
-    persianFact: persianFactReducer,
+    uselessFact: uselessFactReducer,
   },
 });
 

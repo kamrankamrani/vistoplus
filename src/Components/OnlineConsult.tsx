@@ -10,14 +10,14 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoDialog from "./InfoDialog";
 import "../Styles/OnlineConsult/online-consult.css";
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
-import DotsProgress from "./OnlineConsult/DotsProgress";
+import DotsProgress from "./PrivateComponents/OnlineConsult/DotsProgress";
 import FormState, {
   OnlineConsultFromDateType,
-} from "./OnlineConsult/FormState";
+} from "./PrivateComponents/OnlineConsult/FormState";
 import ResponseOnlineConsultForm, {
   returnResultData,
-} from "./OnlineConsult/ResonseForm";
-import ConsultResult from "./OnlineConsult/ConsultResult";
+} from "./PrivateComponents/OnlineConsult/ResonseForm";
+import ConsultResult from "./PrivateComponents/OnlineConsult/ConsultResult";
 import DarkModeContext from "./DarkModeContext";
 const MAX_FROM_STEP = 4; //start from zero
 

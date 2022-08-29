@@ -2,9 +2,9 @@ import { Chip, Divider, Grid, Typography } from "@mui/material";
 import PlaylistAddCheckRoundedIcon from "@mui/icons-material/PlaylistAddCheckRounded";
 import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
 import ReportGmailerrorredRoundedIcon from "@mui/icons-material/ReportGmailerrorredRounded";
-import "../../Styles/OnlineConsult/online-consult.css";
+import "../../../Styles/OnlineConsult/online-consult.css";
 import { returnResultData } from "./ResonseForm";
-import DarkModeContext from "../DarkModeContext";
+import DarkModeContext from "../../DarkModeContext";
 import { useContext } from "react";
 
 export default function ConsultResult(formResult: returnResultData) {

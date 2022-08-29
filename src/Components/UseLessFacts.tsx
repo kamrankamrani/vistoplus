@@ -10,20 +10,19 @@ import axios, { AxiosResponse } from "axios";
 import { TranslateResponse, UselessFactResponse } from "../Services/Types";
 import LoadingComponent from "./LoadingComponent";
 import LangSelect from "./LangSelect";
-import type { RootState } from "./store";
-import { useDispatch, useSelector } from "react-redux";
-import { setPersianValue } from "./reducers/uselessFactSlice";
+import { setEnglishFact, setPersianValue } from "./featuers/uselessFactSlice";
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
 
 export default function UseLessFacts() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
-  // const [fact, setFact] = useState("");
-  const fact = useSelector((state: RootState) => state.persianFact.value);
-  const [EnFact, setEnFact] = useState("");
+  const fact = useAppSelector((state) => state.uselessFact.persianValue);
+  // const [EnFact, setEnFact] = useState("");
+  const EnFact = useAppSelector((state) => state.uselessFact.englishFact);
   const DefaultLightIconColor = "#f1f1f1";
   const [lang, setLang] = useState("fa");
   const [theme] = useContext(DarkModeContext);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (theme === "dark") {
@@ -41,7 +40,8 @@ export default function UseLessFacts() {
         if (response.data && typeof response.data === "object") {
           const responseData: UselessFactResponse = response.data;
           console.log("original data is ", responseData.text);
-          setEnFact(responseData.text);
+          // setEnFact(responseData.text);
+          dispatch(setEnglishFact(responseData.text));
           axios
             .get(
               `https://api.mymemory.translated.net/get?q=${responseData.text}&langpair=en|fa`

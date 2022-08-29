@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { ReactNode, useEffect, useState } from "react";
-import "../../Styles/DotsProgress/dots-progress.css";
+import "../../../Styles/DotsProgress/dots-progress.css";
 
 interface IProps {
   number: number;

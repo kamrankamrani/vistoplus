@@ -1,9 +1,9 @@
 import { Grid, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
-import "../../Styles/Chart/chart.css";
+import "../../../Styles/Chart/chart.css";
 import MapTempToHeight from "./MapTempToHeight";
-import { DailyForeCastResponse } from "../../Services/Types";
+import { DailyForeCastResponse } from "../../../Services/Types";
 import NightlightRoundedIcon from "@mui/icons-material/NightlightRounded";
 import MyTooltip from "./MyTooltip";
 
