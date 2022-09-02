@@ -2,15 +2,16 @@ import { Grid, Paper, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Home/home.css";
-import DarkModeContext from "./DarkModeContext";
 import IS_smScreen from "./Screen";
 import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
 import ThermostatRoundedIcon from "@mui/icons-material/ThermostatRounded";
+import { useAppSelector } from "./reduxHooks";
 
 export default function Home() {
   const isSmScreen = useContext(IS_smScreen());
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
+  // const [theme] = useContext(DarkModeContext);
   const navigate = useNavigate();
 
   const handleItemClick = (element: string) => {

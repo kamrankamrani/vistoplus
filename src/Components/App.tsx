@@ -5,15 +5,15 @@ import UseLessFacts from "./UseLessFacts";
 import "vazirmatn/Vazirmatn-font-face.css";
 import { Grid } from "@mui/material";
 import "../Styles/App/appStyles.css";
-import DarkModeContext from "./DarkModeContext";
 import { useContext } from "react";
 import BottomBar from "./BottomBar";
 import OnlineConsult from "./OnlineConsult";
 import IS_smScreen from "./Screen";
 import Weather from "./Weather";
+import { useAppSelector } from "./reduxHooks";
 
 export default function App() {
-  const [darkMode] = useContext(DarkModeContext);
+  const darkMode = useAppSelector((state) => state.darkMode.value);
   const isSmScreen = useContext(IS_smScreen());
   return (
     <BrowserRouter>

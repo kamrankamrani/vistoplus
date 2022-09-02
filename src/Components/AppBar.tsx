@@ -13,18 +13,23 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import { useContext, useEffect, useState } from "react";
 import IS_smScreen from "./Screen";
-import DarkModeContext from "./DarkModeContext";
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
+import { setDarkMode } from "./featuers/darkModeSlice";
 
 const StaticAppBar = () => {
   const isSmScreen = useContext(IS_smScreen());
   const [switchValue, setSwitchValue] = useState(false);
-  const [theme, setTheme] = useContext(DarkModeContext);
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.darkMode.value);
+  // const [theme, setTheme] = useContext(DarkModeContext);
 
   useEffect(() => {
     if (switchValue) {
-      setTheme("dark");
+      dispatch(setDarkMode("dark"));
+      // setTheme("dark");
     } else {
-      setTheme("light");
+      dispatch(setDarkMode("light"));
+      // setTheme("light");
     }
   }, [switchValue]);
 

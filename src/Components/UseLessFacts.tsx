@@ -1,28 +1,32 @@
 import { Button, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import "../Styles/UselessFacts/uselessFactsStyles.css";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import DarkModeContext from "./DarkModeContext";
-import { UselessApi } from "../Services/Api";
-import { UselessFactBaseUrl } from "../Info/Config";
-import axios, { AxiosResponse } from "axios";
-import { TranslateResponse, UselessFactResponse } from "../Services/Types";
 import LoadingComponent from "./LoadingComponent";
 import LangSelect from "./LangSelect";
 import { setEnglishFact, setPersianValue } from "./featuers/uselessFactSlice";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
+import { useGetRandomFactQuery } from "../Services/uselessFactApiQuery";
+import { useGetTranslatedDataQuery } from "../Services/translateToPersianApi";
 
 export default function UseLessFacts() {
-  const [loading, setLoading] = useState(false);
+  const [enFactskip, setGetEnFactSkip] = useState(true);
+  const [skipTranslate, setSkipTranslate] = useState(true);
   const [DefaultIconColor, setDefaulColor] = useState("rgba(0, 0, 0, 0.54)");
-  const fact = useAppSelector((state) => state.uselessFact.persianValue);
-  // const [EnFact, setEnFact] = useState("");
+  const persianFact = useAppSelector((state) => state.uselessFact.persianValue);
   const EnFact = useAppSelector((state) => state.uselessFact.englishFact);
   const DefaultLightIconColor = "#f1f1f1";
   const [lang, setLang] = useState("fa");
   const [theme] = useContext(DarkModeContext);
   const dispatch = useAppDispatch();
+  const EngFactFromQuery = useGetRandomFactQuery(undefined, {
+    skip: enFactskip,
+  });
+  const TranslatedFactFromQuery = useGetTranslatedDataQuery(EnFact, {
+    skip: skipTranslate,
+  });
 
   useEffect(() => {
     if (theme === "dark") {
@@ -32,52 +36,35 @@ export default function UseLessFacts() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    setGetEnFactSkip(true);
+    if (EngFactFromQuery.isSuccess) {
+      dispatch(setEnglishFact(EngFactFromQuery.data));
+      setSkipTranslate(false);
+    }
+  }, [EngFactFromQuery.data]);
+
+  useEffect(() => {
+    setSkipTranslate(true);
+    if (TranslatedFactFromQuery.isSuccess) {
+      if (TranslatedFactFromQuery.data) {
+        dispatch(
+          setPersianValue(
+            TranslatedFactFromQuery.data?.responseData.translatedText
+          )
+        );
+      }
+    }
+  }, [TranslatedFactFromQuery.data]);
+
+  useEffect(() => {
+    console.log("en fact is", EnFact);
+  }, [EnFact]);
+
   const handleApirequest = () => {
-    setLoading(true);
-    UselessApi.get(UselessFactBaseUrl)
-      .then((response: AxiosResponse<"object">) => {
-        // setLoading(false);
-        if (response.data && typeof response.data === "object") {
-          const responseData: UselessFactResponse = response.data;
-          console.log("original data is ", responseData.text);
-          // setEnFact(responseData.text);
-          dispatch(setEnglishFact(responseData.text));
-          axios
-            .get(
-              `https://api.mymemory.translated.net/get?q=${responseData.text}&langpair=en|fa`
-            )
-            .then((res: AxiosResponse<"object">) => {
-              setLoading(false);
-              if (res.data && typeof res.data === "object") {
-                const translatedData: TranslateResponse = res.data;
-                if (
-                  translatedData.responseData &&
-                  translatedData.responseData.translatedText
-                ) {
-                  console.log(
-                    "translate => ",
-                    translatedData.responseData.translatedText
-                  );
-                  dispatch(
-                    setPersianValue(translatedData.responseData.translatedText)
-                  );
-                }
-              }
-            })
-            .catch((err) => {
-              setLoading(false);
-              console.log("translate error ", err);
-            });
-        } else {
-          setLoading(false);
-          console.log("response data type", typeof response.data);
-        }
-      })
-      .catch((error: string) => {
-        setLoading(false);
-        console.log("error is", error);
-      });
+    setGetEnFactSkip(false);
   };
+
   return (
     <Grid xs={12} md={6} container className="app-container">
       <Paper
@@ -90,16 +77,20 @@ export default function UseLessFacts() {
       <Paper
         className={"bottom-paper " + (theme === "dark" ? "dark-paper" : "")}
       >
-        {!fact.length ? (
+        {!EnFact.length ? (
           <Button
             onClick={() => handleApirequest()}
             className={
               "ready-button " +
               (theme === "dark" ? "dark-button " : "") +
-              (loading ? "disable-button" : "")
+              (TranslatedFactFromQuery.isFetching || EngFactFromQuery.isFetching
+                ? "disable-button"
+                : "")
             }
           >
-            {!loading ? (
+            {!(
+              TranslatedFactFromQuery.isFetching || EngFactFromQuery.isFetching
+            ) ? (
               <Typography className="ready-button-text">
                 آمادگیشو داری؟
               </Typography>
@@ -114,7 +105,7 @@ export default function UseLessFacts() {
               "response-text " + (lang === "fa" ? "rtl-direction" : "")
             }
           >
-            {lang === "en" ? EnFact : fact}
+            {lang === "en" ? EnFact : persianFact}
           </Typography>
         )}
         <Grid container className="very-buttom-container">
@@ -123,14 +114,16 @@ export default function UseLessFacts() {
           </Grid>
           <Button
             onClick={() => handleApirequest()}
-            disabled={fact.length ? false : true}
+            disabled={persianFact.length ? false : true}
             className={
               "new-fact-button " +
               (theme === "dark" ? "dark-button " : "") +
-              (!fact.length ? "disable-button" : "")
+              (!persianFact.length ? "disable-button" : "")
             }
           >
-            {!loading ? (
+            {!(
+              TranslatedFactFromQuery.isFetching || EngFactFromQuery.isFetching
+            ) ? (
               <Typography className="new-fact-text">فکت جدید!</Typography>
             ) : (
               <LoadingComponent />

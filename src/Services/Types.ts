@@ -8,9 +8,10 @@ export interface UselessFactResponse {
 }
 
 export interface TranslateResponse {
-  responseData?: {
-    translatedText?: string;
+  responseData: {
+    translatedText: string;
   };
+  isTranslated: boolean;
 }
 
 export interface GeoCodingResponse {
