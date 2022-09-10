@@ -107,3 +107,8 @@ export interface DailyForeCastResponse {
     dt_text: string;
   }[];
 }
+
+export interface CityMenuProps {
+  openCityMenu: boolean;
+  anchorForCityMenu: string | null;
+}

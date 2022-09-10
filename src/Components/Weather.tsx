@@ -1,15 +1,19 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import "../Styles/Weather/weather.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { OpenWeatherApiKey } from "../Info/Config";
 import {
+  CityMenuProps,
   CurrentWeatherResponse,
   DailyForeCastResponse,
   GeoCodingResponse,
 } from "../Services/Types";
 import Chart from "./PrivateComponents/weather/Chart";
+import CityMenu from "./PrivateComponents/weather/CityMenu";
+import { useAppDispatch, useAppSelector } from "./reduxHooks";
+import { setOpenCityAnchor, setOpenCityMenu } from "./featuers/cityMenuSlice";
 
 export default function Weather() {
   const [LAT, setLat] = useState("35.6892523");
@@ -18,6 +22,11 @@ export default function Weather() {
   const [dailyForecast, setDailyForecast] = useState(
     {} as DailyForeCastResponse
   );
+
+  const cityMenuAnchor = useAppSelector(
+    (state) => state.cityMenuSlice.anchorForCityMenu
+  );
+  const dispatch = useAppDispatch();
 
   const getGeoCode = (city_ = "Tehran") => {
     axios
@@ -30,7 +39,7 @@ export default function Weather() {
           setLat(GeoCodingRes.lat);
           setLon(GeoCodingRes.lon);
           setCity(GeoCodingRes.name);
-          console.log(GeoCodingRes);
+          // console.log(GeoCodingRes);
         }
       })
       .catch((err) => {
@@ -46,7 +55,7 @@ export default function Weather() {
       .then((response: AxiosResponse<"object">) => {
         if (response.data && typeof response.data === "object") {
           const CurrentWeatherRes: CurrentWeatherResponse = response.data;
-          console.log("current weather ", CurrentWeatherRes);
+          // console.log("current weather ", CurrentWeatherRes);
         }
       })
       .catch((err) => {
@@ -63,13 +72,20 @@ export default function Weather() {
         if (response.data && typeof response.data === "object") {
           setDailyForecast(response.data);
           const DailyForeCastRes: DailyForeCastResponse = response.data;
-          console.log("forecast is ", DailyForeCastRes);
+          // console.log("forecast is ", DailyForeCastRes);
         }
       })
       .catch((err) => {
         console.log("daily forecast error", err);
       });
   }
+
+  const handleCityMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (!cityMenuAnchor) {
+      dispatch(setOpenCityAnchor(event.currentTarget.id));
+      dispatch(setOpenCityMenu(true));
+    }
+  };
 
   useEffect(() => {
     // getGeoCode();
@@ -86,24 +102,29 @@ export default function Weather() {
               <Typography variant="caption">C</Typography>
             </Grid>
             <Grid container className="city-button-container">
-              <Button className="city-button">
+              <Button
+                id="city-menu-button"
+                className="city-button"
+                onClick={(e) => handleCityMenuClick(e)}
+              >
                 <SettingsOutlinedIcon
                   fontSize="small"
                   sx={{ position: "absolute", color: "inherit", left: "5px" }}
                 />
                 <Typography className="text">تهران</Typography>
+                <CityMenu />
               </Button>
             </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={8} className="weather-paper-container">
-          <Paper className="weather-paper">
-            <Chart dailyForecast={dailyForecast} />
           </Paper>
         </Grid>
         <Grid item xs={6} md={2} className="weather-paper-container">
           <Paper className="weather-paper">
             <Typography>quality</Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={8} className="weather-paper-container">
+          <Paper className="weather-paper">
+            <Chart dailyForecast={dailyForecast} />
           </Paper>
         </Grid>
       </Grid>

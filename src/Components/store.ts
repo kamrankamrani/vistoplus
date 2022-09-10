@@ -3,12 +3,13 @@ import { translateToPersianApi } from "../Services/translateToPersianApi";
 import { uselessFactApi } from "../Services/uselessFactApiQuery";
 import darkModeSlice from "./featuers/darkModeSlice";
 import uselessFactReducer from "./featuers/uselessFactSlice";
+import cityMenuSlice from "./featuers/cityMenuSlice";
 
 const store = configureStore({
   reducer: {
     uselessFact: uselessFactReducer,
     darkMode: darkModeSlice,
-
+    cityMenuSlice: cityMenuSlice,
     [uselessFactApi.reducerPath]: uselessFactApi.reducer,
     [translateToPersianApi.reducerPath]: translateToPersianApi.reducer,
   },
