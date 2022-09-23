@@ -15,6 +15,11 @@
   margin-top: 20px;
 }
 
+.moon {
+  color: #8a8582;
+  transform: rotate(-45deg);
+}
+
 .chart-wrapper {
   display: flex;
   justify-content: space-between;
@@ -45,8 +50,8 @@
 }
 
 .circle {
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   border: 2px solid #555;
   background-color: transparent;
   border-radius: 50%;
@@ -56,13 +61,13 @@
 }
 
 .tooltip-container {
-  background-color: #faf9f9;
-  padding: 5px;
-  border-radius: 10px;
-  border: #555 solid 1px;
+  padding: 2px;
+  /* border-radius: 10px; */
 }
 
 .tooltip {
-  color: brown;
-  background-color: #eeeeee;
+  color: rgb(32, 52, 133);
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

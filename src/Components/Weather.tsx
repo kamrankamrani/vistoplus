@@ -1,11 +1,10 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import "../Styles/Weather/weather.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { OpenWeatherApiKey } from "../Info/Config";
 import {
-  CityMenuProps,
   CurrentWeatherResponse,
   DailyForeCastResponse,
   GeoCodingResponse,
@@ -81,6 +80,7 @@ export default function Weather() {
   }
 
   const handleCityMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
     if (!cityMenuAnchor) {
       dispatch(setOpenCityAnchor(event.currentTarget.id));
       dispatch(setOpenCityMenu(true));

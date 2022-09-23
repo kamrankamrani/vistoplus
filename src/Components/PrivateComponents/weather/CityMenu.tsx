@@ -13,7 +13,8 @@ export default function CityMenu() {
 
   const dispatch = useAppDispatch();
 
-  const handleClose = () => {
+  const handleCloseCityMenu = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     dispatch(setOpenCityMenu(false));
     dispatch(setOpenCityAnchor(null));
   };
@@ -24,7 +25,7 @@ export default function CityMenu() {
       anchorEl={
         cityMenuAnchor ? document.querySelector(`#${cityMenuAnchor}`) : null
       }
-      onClose={() => handleClose()}
+      onClose={(e: React.MouseEvent<HTMLElement>) => handleCloseCityMenu(e)}
     >
       <MenuItem>City</MenuItem>
       <MenuItem>City</MenuItem>

@@ -122,10 +122,18 @@ export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
             ? test_data.map((val, index) => {
                 return (
                   <Grid key={index} item className="circle-wrapper">
-                    <div
-                      className="circle"
-                      style={{ top: maxTempPixels[index] }}
-                    ></div>
+                    <Tooltip
+                      title={<MyTooltip />}
+                      classes={{
+                        popper: "tooltip-container",
+                        tooltip: "tooltip",
+                      }}
+                    >
+                      <div
+                        className="circle"
+                        style={{ top: maxTempPixels[index] }}
+                      ></div>
+                    </Tooltip>
                   </Grid>
                 );
               })
@@ -169,7 +177,7 @@ export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
             ? test_data.map((val, index) => {
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
-                    <NightlightRoundedIcon style={{ color: "#94908D" }} />
+                    <NightlightRoundedIcon className="moon" />
                   </Grid>
                 );
               })
