@@ -58,6 +58,15 @@ export interface CurrentWeatherResponse {
   cod: string;
 }
 
+export interface CurrentWeatherCustomizeResponse {
+  temp: string;
+  humidity: string;
+  wind: {
+    speed: string;
+    deg: string;
+  };
+}
+
 export interface DailyForeCastResponse {
   city: {
     id: string;

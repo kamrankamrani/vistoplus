@@ -13,19 +13,24 @@ import Chart from "./PrivateComponents/weather/Chart";
 import CityMenu from "./PrivateComponents/weather/CityMenu";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import { setOpenCityAnchor, setOpenCityMenu } from "./featuers/cityMenuSlice";
+import { useGetCurrentWeatherQuery } from "../Services/weatherApiQuery";
+import { setCurrentLocation } from "./featuers/weatherSlice";
 
 export default function Weather() {
-  const [LAT, setLat] = useState("35.6892523");
-  const [LON, setLon] = useState("51.3896004");
-  const [City, setCity] = useState("Tehran");
+  const LAT = useAppSelector((state) => state.weatherSlice.lat);
+  const LON = useAppSelector((state) => state.weatherSlice.lon);
+  const City = useAppSelector((state) => state.weatherSlice.city);
+  const dispatch = useAppDispatch();
+  const getCurrentWeatherData = useGetCurrentWeatherQuery({
+    lat: LAT,
+    lon: LON,
+  });
   const [dailyForecast, setDailyForecast] = useState(
     {} as DailyForeCastResponse
   );
-
   const cityMenuAnchor = useAppSelector(
     (state) => state.cityMenuSlice.anchorForCityMenu
   );
-  const dispatch = useAppDispatch();
 
   const getGeoCode = (city_ = "Tehran") => {
     axios
@@ -35,9 +40,16 @@ export default function Weather() {
       .then((response: AxiosResponse<"object">) => {
         if (response.data && typeof response.data === "object") {
           const GeoCodingRes: GeoCodingResponse = response.data;
-          setLat(GeoCodingRes.lat);
-          setLon(GeoCodingRes.lon);
-          setCity(GeoCodingRes.name);
+          dispatch(
+            setCurrentLocation({
+              lat: GeoCodingRes.lat,
+              lon: GeoCodingRes.lon,
+              city: GeoCodingRes.name,
+            })
+          );
+          // setLat(GeoCodingRes.lat);
+          // setLon(GeoCodingRes.lon);
+          // setCity(GeoCodingRes.name);
           // console.log(GeoCodingRes);
         }
       })
@@ -92,6 +104,11 @@ export default function Weather() {
     // getCurrentWeather();
     // getForecastDaily();
   }, []);
+
+  useEffect(() => {
+    console.log("weather data is ", getCurrentWeatherData.data);
+  }, [getCurrentWeatherData.data]);
+
   return (
     <Grid container className="weather-container">
       <Grid container className="weather-row-container">
