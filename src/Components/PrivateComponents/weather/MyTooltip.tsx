@@ -3,8 +3,13 @@ import ThermostatRoundedIcon from "@mui/icons-material/ThermostatRounded";
 import AirRoundedIcon from "@mui/icons-material/AirRounded";
 import "../../../Styles/MyTooltip/mytooltip.css";
 import { NumToPersian } from "../../../Services/ConvertNum";
+import { DailyForecastCustomizedResponse } from "../../../Services/Types";
 
-const MyTooltip = () => {
+interface IProps {
+  data: DailyForecastCustomizedResponse;
+}
+
+const MyTooltip = (props: IProps) => {
   return (
     <Grid container>
       <Grid item xs={12} className="tooltip-content-container">
@@ -14,13 +19,13 @@ const MyTooltip = () => {
           className="temp-icon"
         />
         <Typography className="tooltip-text temp-icon">
-          {NumToPersian(25)}
+          {NumToPersian(props.data.temp)}
         </Typography>
       </Grid>
       <Grid item xs={12} className="tooltip-content-container">
         <AirRoundedIcon color="inherit" fontSize="small" />
         <Typography className="tooltip-text">
-          {NumToPersian(133)} km/h
+          {NumToPersian(props.data.humidity)} %
         </Typography>
       </Grid>
     </Grid>

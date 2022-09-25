@@ -58,7 +58,7 @@ export interface CurrentWeatherResponse {
   cod: string;
 }
 
-export interface CurrentWeatherCustomizeResponse {
+export interface CurrentWeatherCustomizedResponse {
   temp: string;
   humidity: string;
   wind: {
@@ -115,6 +115,17 @@ export interface DailyForeCastResponse {
     };
     dt_text: string;
   }[];
+}
+
+export interface DailyForecastCustomizedResponse {
+  temp: string;
+  humidity: string;
+  temp_min: string;
+  temp_max: string;
+  wind: {
+    speed: string;
+    deg: string;
+  };
 }
 
 export interface CityMenuProps {

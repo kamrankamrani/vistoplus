@@ -5,7 +5,7 @@ import darkModeSlice from "./featuers/darkModeSlice";
 import uselessFactReducer from "./featuers/uselessFactSlice";
 import cityMenuSlice from "./featuers/cityMenuSlice";
 import weatherSlice from "./featuers/weatherSlice";
-import { currentWeatherApi } from "../Services/weatherApiQuery";
+import { weatherApi } from "../Services/weatherApiQuery";
 
 const store = configureStore({
   reducer: {
@@ -15,13 +15,13 @@ const store = configureStore({
     weatherSlice: weatherSlice,
     [uselessFactApi.reducerPath]: uselessFactApi.reducer,
     [translateToPersianApi.reducerPath]: translateToPersianApi.reducer,
-    [currentWeatherApi.reducerPath]: currentWeatherApi.reducer,
+    [weatherApi.reducerPath]: weatherApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       uselessFactApi.middleware,
       translateToPersianApi.middleware,
-      currentWeatherApi.middleware
+      weatherApi.middleware
     ),
 });
 

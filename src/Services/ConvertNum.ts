@@ -30,7 +30,11 @@ export function NumToPersian(inputNum: number | string): string {
   const persianNums = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   let result = "";
   for (let i = 0; i < length; i++) {
-    result += persianNums[parseInt(inputNum[i])];
+    if (inputNum[i] >= "0" && inputNum[i] <= "9") {
+      result += persianNums[parseInt(inputNum[i])];
+    } else {
+      result += inputNum[i];
+    }
   }
   return result;
 }

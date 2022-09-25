@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import "../../../Styles/Chart/chart.css";
 import MapTempToHeight from "./MapTempToHeight";
-import { DailyForeCastResponse } from "../../../Services/Types";
+import {
+  DailyForecastCustomizedResponse,
+  DailyForeCastResponse,
+} from "../../../Services/Types";
 import NightlightRoundedIcon from "@mui/icons-material/NightlightRounded";
 import MyTooltip from "./MyTooltip";
+import { useAppSelector } from "../../reduxHooks";
 
 export interface Test_list {
   dt?: string;
@@ -74,39 +78,30 @@ const test_data: Test_list[] = [
   },
 ];
 
-export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
-  const [startPoint, setStartPoint] = useState(0);
+export default function Chart() {
+  // const [startPoint, setStartPoint] = useState(0);
   const MAX_HEIGHT = 50;
-  const [forecastData, setForecastData] = useState({} as DailyForeCastResponse);
+  // const [forecastData, setForecastData] = useState({} as DailyForeCastResponse);
   const [maxTempPixels, setMaxTempPixels] = useState([] as number[]);
   const [minTempPixels, setMinTempPixels] = useState([] as number[]);
-
-  // setForecastData(test_data);
-  useEffect(() => {
-    if (props.dailyForecast && props.dailyForecast.list) {
-      setForecastData(props.dailyForecast);
-      // MapTempToHeight(props.dailyForecast.list, MAX_HEIGHT);
-      // MapTempToHeight(test_data, MAX_HEIGHT);
-    }
-  }, [props]);
+  const foreCastData: DailyForecastCustomizedResponse[] | undefined =
+    useAppSelector((state) => state.weatherSlice.dailyForecast);
 
   useEffect(() => {
-    const el: HTMLElement | null = document.querySelector("#chart-wrapper");
-    if (el) {
-      const parentWidth: number = el.offsetWidth;
-      setStartPoint(Math.floor(parentWidth / 5 - parentWidth / 10));
+    console.log("forecast data ", foreCastData);
+    if (foreCastData) {
+      const [maxPixels, minPixels] = MapTempToHeight(foreCastData, MAX_HEIGHT);
+      setMaxTempPixels(maxPixels);
+      setMinTempPixels(minPixels);
     }
-    const [maxPixels, minPixels] = MapTempToHeight(test_data, MAX_HEIGHT);
-    setMaxTempPixels(maxPixels);
-    setMinTempPixels(minPixels);
-  }, []);
+  }, [JSON.stringify(foreCastData)]);
 
   return (
     <Grid container className="chart-container">
       <Grid item xs={12} className="chart-sun-icon-container">
         <Grid container className="icons-wrapper">
-          {test_data
-            ? test_data.map((val, index) => {
+          {foreCastData
+            ? foreCastData.map((val, index) => {
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
                     <WbSunnyRoundedIcon style={{ color: "#FC9601" }} />
@@ -118,12 +113,12 @@ export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
       </Grid>
       <Grid item xs={12}>
         <Grid container className="chart-wrapper">
-          {test_data
-            ? test_data.map((val, index) => {
+          {foreCastData
+            ? foreCastData.map((val, index) => {
                 return (
                   <Grid key={index} item className="circle-wrapper">
                     <Tooltip
-                      title={<MyTooltip />}
+                      title={<MyTooltip data={val} />}
                       classes={{
                         popper: "tooltip-container",
                         tooltip: "tooltip",
@@ -149,12 +144,12 @@ export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
           </svg> */}
         </Grid>
         <Grid container className="chart-wrapper">
-          {test_data
-            ? test_data.map((val, index) => {
+          {foreCastData
+            ? foreCastData.map((val, index) => {
                 return (
                   <Grid key={index} item className="circle-wrapper">
                     <Tooltip
-                      title={<MyTooltip />}
+                      title={<MyTooltip data={val} />}
                       classes={{
                         popper: "tooltip-container",
                         tooltip: "tooltip",
@@ -173,8 +168,8 @@ export default function Chart(props: { dailyForecast: DailyForeCastResponse }) {
       </Grid>
       <Grid item xs={12} className="chart-moon-icon-container">
         <Grid container className="icons-wrapper">
-          {test_data
-            ? test_data.map((val, index) => {
+          {foreCastData
+            ? foreCastData.map((val, index) => {
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
                     <NightlightRoundedIcon className="moon" />
