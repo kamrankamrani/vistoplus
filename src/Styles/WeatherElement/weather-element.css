@@ -1,0 +1,258 @@
+.sun {
+  position: absolute;
+  top: -10%;
+  left: 65%;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: linear-gradient(
+    to bottom left,
+    rgba(255, 235, 59, 1) 0%,
+    rgba(249, 168, 37, 1) 90%
+  );
+  box-shadow: 1px 1px 30px rgba(255, 160, 0, 1);
+  animation: sunny 3s infinite linear;
+}
+
+.cloud {
+  position: absolute;
+  top: 5%;
+  left: 70%;
+  width: 60px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: rgba(129, 212, 250, 1);
+  box-shadow: 1px 1px 30px rgba(0, 151, 167, 1);
+  animation: move 3s infinite linear;
+}
+
+.rainy {
+  position: absolute;
+  top: 5%;
+  left: 60%;
+  width: 60px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: rgba(96, 125, 139, 1);
+  box-shadow: 1px 1px 30px rgba(84, 110, 122, 1);
+  animation: flash 1.5s infinite linear;
+}
+
+.ul-rainy-element li {
+  position: absolute;
+  list-style: none;
+  width: 2px;
+  height: 7px;
+  border-radius: 10%;
+  background-color: #eee;
+  opacity: 0;
+  animation: fall 3s infinite linear;
+  transform: rotate(25deg);
+}
+
+.ul-rainy-element li:nth-child(1) {
+  top: 10%;
+  left: 95%;
+}
+
+.ul-rainy-element li:nth-child(2) {
+  top: 5%;
+  left: 83%;
+  animation-delay: 0.3s;
+}
+
+.ul-rainy-element li:nth-child(3) {
+  top: 4%;
+  left: 87%;
+  animation-delay: 0.6s;
+}
+
+.ul-rainy-element li:nth-child(4) {
+  top: 15%;
+  left: 70%;
+  animation-delay: 1s;
+}
+
+.ul-rainy-element li:nth-child(5) {
+  top: 10%;
+  left: 75%;
+}
+
+.snow {
+  position: absolute;
+  top: 5%;
+  left: 60%;
+  width: 60px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: rgba(96, 125, 139, 1);
+  box-shadow: 1px 1px 30px rgba(84, 110, 122, 1);
+  animation: flash 4s infinite linear;
+}
+
+.ul-snow-element li {
+  position: absolute;
+  list-style: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: #777;
+  box-shadow: 1px 1px 30px #555;
+  animation: fall 3s infinite linear;
+  opacity: 0;
+}
+
+.ul-snow-element li:nth-child(1) {
+  top: 0%;
+  left: 100%;
+}
+.ul-snow-element li:nth-child(2) {
+  top: 5%;
+  left: 90%;
+}
+.ul-snow-element li:nth-child(3) {
+  top: -10%;
+  left: 80%;
+  animation-delay: 2s;
+}
+.ul-snow-element li:nth-child(4) {
+  top: 10%;
+  left: 100%;
+  animation-delay: 2s;
+}
+.ul-snow-element li:nth-child(5) {
+  top: 20%;
+  left: 80%;
+  animation-delay: 0.5s;
+}
+.ul-snow-element li:nth-child(6) {
+  top: 35%;
+  left: 70%;
+  background-color: #bbb;
+  animation-delay: 0.5s;
+}
+.ul-snow-element li:nth-child(7) {
+  top: 23%;
+  left: 60%;
+  background-color: #bbb;
+  animation-delay: 0.8s;
+}
+.ul-snow-element li:nth-child(7) {
+  top: 5%;
+  left: 70%;
+  background-color: #bbb;
+  animation-delay: 0.8s;
+}
+
+.moon {
+  position: absolute;
+  top: -10%;
+  left: 65%;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  background: rgba(255, 241, 118, 1);
+  box-shadow: 1px 1px 30px rgba(224, 224, 224, 1);
+}
+
+.night li {
+  position: absolute;
+  list-style: none;
+  width: 3px;
+  height: 3px;
+  border-radius: 100%;
+  background-color: #fff;
+  transform: rotate(45deg);
+}
+
+.night li:nth-child(1) {
+  top: 30%;
+  left: 65%;
+}
+
+.night li:nth-child(2) {
+  top: 35%;
+  left: 53%;
+}
+
+.night li:nth-child(3) {
+  opacity: 0;
+  top: 20%;
+  left: 75%;
+  width: 2px;
+  height: 2px;
+  animation: meteor 1.5s infinite linear;
+  animation-delay: 0s;
+  animation-delay: 0.6s;
+}
+
+.night li:nth-child(4) {
+  top: 5%;
+  left: 50%;
+}
+
+.night li:nth-child(5) {
+  opacity: 0;
+  top: 20%;
+  left: 55%;
+  width: 1px;
+  height: 15px;
+  animation: meteor 1.5s infinite linear;
+}
+
+@keyframes meteor {
+  10% {
+    opacity: 1;
+  }
+  80% {
+    left: 10%;
+    top: 75%;
+    opacity: 0;
+  }
+}
+
+@keyframes move {
+  50% {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes flash {
+  48% {
+    background-color: rgba(96, 125, 139, 1);
+  }
+  50% {
+    background-color: #fff;
+  }
+  55% {
+    background-color: rgba(96, 125, 139, 1);
+  }
+  57% {
+    background-color: #fff;
+  }
+}
+
+@keyframes sunny {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  80% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fall {
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-10px, 30px);
+  }
+  100% {
+    transform: translate(-25px, 70px);
+  }
+}

@@ -14,12 +14,14 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px;
   width: 100%;
   display: flex;
+  position: relative;
 }
 .temp-paper {
   justify-content: space-between;
   flex-direction: column;
   padding-top: 20px;
   min-height: 100px;
+  position: relative;
 }
 .humidity-paper {
   justify-content: center;
@@ -29,7 +31,8 @@
 }
 .temp-display {
   display: flex;
-  justify-content: center;
+  padding-right: 30px;
+  padding-left: 30px;
   align-items: center;
 }
 .city-button-container {
@@ -42,6 +45,24 @@
 }
 .temp-text {
   font-weight: bold;
+  color: #f1f1f1;
+}
+.main-temp-show-text {
+  font-weight: 450;
+  font-size: 1em;
+  font-family: Vazirmatn, sans-serif;
+  color: #f1f1f1;
+}
+.degree-sign-text {
+  font-weight: 450;
+  font-size: 0.8em;
+  font-family: Vazirmatn, sans-serif;
+  color: #f1f1f1;
+}
+.main-humidity-show-text {
+  font-weight: 450;
+  font-size: 1em;
+  font-family: Vazirmatn, sans-serif;
 }
 .city-button {
   display: flex;
@@ -49,4 +70,40 @@
   justify-content: center;
   width: 100%;
   position: relative;
+  color: #f1f1f1;
+}
+.sunny-background {
+  background-image: linear-gradient(
+    to top right,
+    rgba(255, 87, 34, 1) 0%,
+    rgba(251, 140, 0, 1) 100%
+  );
+}
+.clear-background {
+  background: linear-gradient(
+    to bottom right,
+    rgba(63, 81, 181, 1) 0%,
+    rgba(171, 71, 188, 1) 70%
+  );
+}
+.cloudy-background {
+  background: linear-gradient(
+    to top right,
+    rgba(63, 81, 181, 1) 0%,
+    rgba(3, 155, 229, 1) 40%
+  );
+}
+.rainy-background {
+  background: linear-gradient(
+    to top right,
+    rgba(156, 204, 101, 1) 0%,
+    rgba(38, 198, 218, 1) 50%
+  );
+}
+.snow-background {
+  background: linear-gradient(
+    to top right,
+    rgba(117, 117, 117, 1) 0%,
+    rgba(33, 33, 33, 1) 90%
+  );
 }

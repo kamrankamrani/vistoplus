@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   CurrentWeatherCustomizedResponse,
   DailyForecastCustomizedResponse,
-  DailyForeCastResponse,
 } from "../../Services/Types";
 
 interface weatherSliceType {
@@ -11,12 +10,16 @@ interface weatherSliceType {
   lon: string;
   currentWeather?: CurrentWeatherCustomizedResponse;
   dailyForecast?: DailyForecastCustomizedResponse[];
+  weatherCondition: string | null;
+  weatherConditionClass: string;
 }
 
 const initialState: weatherSliceType = {
   city: "Tehran",
   lat: "35.6892523",
   lon: "51.3896004",
+  weatherCondition: null,
+  weatherConditionClass: "",
 };
 
 const weatherSlice = createSlice({
@@ -61,6 +64,21 @@ const weatherSlice = createSlice({
         return data_;
       });
     },
+    changeWeatherConditionClass(state, action: PayloadAction<string>) {
+      if (action.payload === "sunny") {
+        state.weatherCondition = action.payload;
+        state.weatherConditionClass = "sunny-background";
+      } else if (action.payload === "snow") {
+        state.weatherConditionClass = "snow-background";
+      } else if (action.payload === "clear") {
+        state.weatherConditionClass = "clear-background";
+      } else if (action.payload === "cloudy") {
+        state.weatherConditionClass = "cloudy-background";
+      } else if (action.payload === "rainy") {
+        state.weatherConditionClass = "rainy-background";
+      }
+      state.weatherCondition = action.payload;
+    },
   },
 });
 
@@ -69,4 +87,5 @@ export const {
   setCurrentLocation,
   setCurrentWeather,
   setDailyForecastWeather,
+  changeWeatherConditionClass,
 } = weatherSlice.actions;

@@ -13,19 +13,26 @@ import {
   useGetGeoCodeQuery,
 } from "../Services/weatherApiQuery";
 import {
+  changeWeatherConditionClass,
   setCurrentWeather,
   setDailyForecastWeather,
 } from "./featuers/weatherSlice";
+import LoadingSpinner from "./LoadingSpinner";
+import { NumToPersian } from "../Services/ConvertNum";
+import { WeatherElement } from "./PrivateComponents/weather/WeatherElement";
 
 export default function Weather() {
   const LAT = useAppSelector((state) => state.weatherSlice.lat);
   const LON = useAppSelector((state) => state.weatherSlice.lon);
   const City = useAppSelector((state) => state.weatherSlice.city);
+  const weatherConditionClass = useAppSelector(
+    (state) => state.weatherSlice.weatherConditionClass
+  ); //sunny cloudy rainy clear snow
   const currentWeather = useAppSelector((state) => state.weatherSlice);
   const dispatch = useAppDispatch();
   const [getGeoCodeSkip, setGetGeoCodeSkip] = useState(true);
-  const [currentWeatherSkip, setCurrentWeatherSkip] = useState(false);
-  const [dailySkip, setDailySkip] = useState(false);
+  const [currentWeatherSkip, setCurrentWeatherSkip] = useState(true);
+  const [dailySkip, setDailySkip] = useState(true);
   const getGeoCodeData = useGetGeoCodeQuery(City, {
     skip: getGeoCodeSkip,
   });
@@ -53,6 +60,13 @@ export default function Weather() {
   const cityMenuAnchor = useAppSelector(
     (state) => state.cityMenuSlice.anchorForCityMenu
   );
+
+  useEffect(() => {
+    const w_ = "clear";
+    setTimeout(() => {
+      dispatch(changeWeatherConditionClass(w_));
+    }, 1000);
+  }, []);
 
   const handleCityMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     if (!cityMenuAnchor) {
@@ -83,12 +97,17 @@ export default function Weather() {
     <Grid container className="weather-container">
       <Grid container className="weather-row-container">
         <Grid item xs={6} md={2} className="weather-paper-container">
-          <Paper className="weather-paper temp-paper">
+          <Paper
+            className={"weather-paper temp-paper " + weatherConditionClass}
+          >
+            <WeatherElement />
             <Grid container className="temp-display">
-              <Typography>
-                {currentWeather.currentWeather?.temp}&deg;
+              <Typography className="main-temp-show-text">
+                {NumToPersian(currentWeather.currentWeather?.temp)}&deg;
               </Typography>
-              <Typography variant="caption">C</Typography>
+              <Typography className="degree-sign-text" variant="caption">
+                C
+              </Typography>
             </Grid>
             <Grid container className="city-button-container">
               <Button
@@ -108,11 +127,14 @@ export default function Weather() {
         </Grid>
         <Grid item xs={6} md={2} className="weather-paper-container">
           <Paper className="weather-paper humidity-paper">
-            <Typography>{currentWeather.currentWeather?.humidity} %</Typography>
+            <Typography className="main-humidity-show-text">
+              {NumToPersian(currentWeather.currentWeather?.humidity)} %
+            </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} md={8} className="weather-paper-container">
           <Paper className="weather-paper">
+            {getDailyForecastData.isLoading ? <LoadingSpinner /> : null}
             <Chart />
           </Paper>
         </Grid>

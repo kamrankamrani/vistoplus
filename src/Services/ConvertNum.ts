@@ -22,8 +22,9 @@
 //     return res;
 // }
 
-export function NumToPersian(inputNum: number | string): string {
-  if (typeof inputNum === "number") {
+export function NumToPersian(inputNum: number | string | undefined): string {
+  if (inputNum === undefined) return "";
+  if (typeof inputNum !== "string") {
     inputNum = inputNum.toString();
   }
   const length = inputNum.length;
