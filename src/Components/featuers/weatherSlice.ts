@@ -19,7 +19,7 @@ const initialState: weatherSliceType = {
   city: "Tehran",
   lat: "35.6892523",
   lon: "51.3896004",
-  weatherCondition: null,
+  weatherCondition: "",
   weatherConditionClass: "",
 };
 
@@ -71,7 +71,7 @@ const weatherSlice = createSlice({
       const date_ = new Date().toLocaleString("en-US", {
         timeZone: "Asia/Tehran",
       });
-      if (new Date(date_).getHours() > 18) {
+      if (new Date(date_).getHours() >= 18) {
         isDay = false;
       }
       if (action.payload.indexOf("sun") >= 0) {

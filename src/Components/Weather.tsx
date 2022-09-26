@@ -20,6 +20,8 @@ import {
 import LoadingSpinner from "./LoadingSpinner";
 import { NumToPersian } from "../Services/ConvertNum";
 import { WeatherElement } from "./PrivateComponents/weather/WeatherElement";
+import WindIcon from "./PrivateComponents/weather/WindIcon";
+import DropIcon from "./PrivateComponents/weather/DropIcon";
 
 export default function Weather() {
   const LAT = useAppSelector((state) => state.weatherSlice.lat);
@@ -105,6 +107,9 @@ export default function Weather() {
           <Paper
             className={"weather-paper temp-paper " + weatherConditionClass}
           >
+            {!getDailyForecastData.isSuccess ? (
+              <LoadingSpinner isShowText={false} />
+            ) : null}
             <WeatherElement />
             <Grid container className="temp-display">
               <Typography className="main-temp-show-text">
@@ -132,6 +137,19 @@ export default function Weather() {
         </Grid>
         <Grid item xs={6} md={2} className="weather-paper-container">
           <Paper className="weather-paper humidity-paper">
+            {!getDailyForecastData.isSuccess ? (
+              <LoadingSpinner isShowText={false} />
+            ) : null}
+            <DropIcon />
+            <Typography className="main-humidity-show-text">
+              {NumToPersian(currentWeather?.humidity)} %
+            </Typography>
+          </Paper>
+          <Paper className="weather-paper wind-paper">
+            {!getDailyForecastData.isSuccess ? (
+              <LoadingSpinner isShowText={false} />
+            ) : null}
+            <WindIcon />
             <Typography className="main-humidity-show-text">
               {NumToPersian(currentWeather?.humidity)} %
             </Typography>
@@ -139,7 +157,9 @@ export default function Weather() {
         </Grid>
         <Grid item xs={12} md={8} className="weather-paper-container">
           <Paper className="weather-paper">
-            {getDailyForecastData.isLoading ? <LoadingSpinner /> : null}
+            {!getDailyForecastData.isSuccess ? (
+              <LoadingSpinner isShowText={true} />
+            ) : null}
             <Chart />
           </Paper>
         </Grid>

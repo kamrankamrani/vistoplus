@@ -1,0 +1,14 @@
+.wind-icon {
+  height: 40px;
+  width: 50px;
+  color: #f1f1f1;
+  position: absolute;
+  top: 0px;
+  animation: windMove 3000ms ease-in-out infinite;
+}
+
+@keyframes windMove {
+  50% {
+    transform: translateX(5px);
+  }
+}
