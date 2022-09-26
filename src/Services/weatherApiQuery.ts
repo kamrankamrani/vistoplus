@@ -27,7 +27,7 @@ export const weatherApi = createApi({
       transformResponse: (
         response: CurrentWeatherResponse
       ): CurrentWeatherCustomizedResponse => {
-        console.log("weather raw is ", response);
+        // console.log("weather raw is ", response);
         const formedRes: CurrentWeatherCustomizedResponse = {
           temp: response.main.temp,
           humidity: response.main.humidity,
@@ -47,6 +47,7 @@ export const weatherApi = createApi({
       query: ({ lat, lon }) =>
         `forecast?lat=${lat}&lon=${lon}&cnt=7&appid=${OpenWeatherApiKey}&units=metric`,
       transformResponse: (response: DailyForeCastResponse) => {
+        // console.log("daily weather raw is ", response);
         const formedRes: DailyForecastCustomizedResponse[] = response.list.map(
           (value) => {
             const rawData: DailyForecastCustomizedResponse = {
@@ -54,6 +55,7 @@ export const weatherApi = createApi({
               humidity: value.main.humidity,
               temp_min: value.main.temp_min,
               temp_max: value.main.temp_max,
+              datetime: value.dt_txt,
               wind: {
                 speed: value.wind.speed,
                 deg: value.wind.deg,

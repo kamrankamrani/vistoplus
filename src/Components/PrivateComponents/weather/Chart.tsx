@@ -3,13 +3,11 @@ import { useEffect, useState } from "react";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import "../../../Styles/Chart/chart.css";
 import MapTempToHeight from "./MapTempToHeight";
-import {
-  DailyForecastCustomizedResponse,
-  DailyForeCastResponse,
-} from "../../../Services/Types";
+import { DailyForecastCustomizedResponse } from "../../../Services/Types";
 import NightlightRoundedIcon from "@mui/icons-material/NightlightRounded";
 import MyTooltip from "./MyTooltip";
 import { useAppSelector } from "../../reduxHooks";
+import { NumToPersian } from "../../../Services/ConvertNum";
 
 export interface Test_list {
   dt?: string;
@@ -26,69 +24,15 @@ export interface Test_list {
   };
 }
 
-const test_data: Test_list[] = [
-  {
-    dt: "",
-    main: {
-      temp_min: "8",
-      temp_max: "12",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "5",
-      temp_max: "23",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "10",
-      temp_max: "28",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "19",
-      temp_max: "22",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "2",
-      temp_max: "27",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "15",
-      temp_max: "25",
-    },
-  },
-  {
-    dt: "",
-    main: {
-      temp_min: "9",
-      temp_max: "23",
-    },
-  },
-];
-
 export default function Chart() {
   // const [startPoint, setStartPoint] = useState(0);
   const MAX_HEIGHT = 50;
-  // const [forecastData, setForecastData] = useState({} as DailyForeCastResponse);
   const [maxTempPixels, setMaxTempPixels] = useState([] as number[]);
   const [minTempPixels, setMinTempPixels] = useState([] as number[]);
   const foreCastData: DailyForecastCustomizedResponse[] | undefined =
     useAppSelector((state) => state.weatherSlice.dailyForecast);
 
   useEffect(() => {
-    console.log("forecast data ", foreCastData);
     if (foreCastData) {
       const [maxPixels, minPixels] = MapTempToHeight(foreCastData, MAX_HEIGHT);
       setMaxTempPixels(maxPixels);
@@ -173,6 +117,23 @@ export default function Chart() {
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
                     <NightlightRoundedIcon className="moon" />
+                  </Grid>
+                );
+              })
+            : null}
+        </Grid>
+      </Grid>
+      <Grid item xs={12} className="chart-moon-icon-container">
+        <Grid container className="icons-wrapper">
+          {foreCastData
+            ? foreCastData.map((val, index) => {
+                const d_ = new Date(val.datetime).getHours();
+                // console.log("date is ", val.datetime);
+                return (
+                  <Grid key={index} item className="single-icon-wrapper">
+                    <Typography className="date-text" variant="caption">
+                      {NumToPersian(`${d_}:00`)}
+                    </Typography>
                   </Grid>
                 );
               })

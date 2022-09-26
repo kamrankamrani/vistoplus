@@ -16,6 +16,12 @@
   display: flex;
   position: relative;
 }
+
+.wind-hum-container {
+  display: flex;
+  padding: 0px 5px;
+}
+
 .temp-paper {
   justify-content: space-between;
   flex-direction: column;
@@ -26,21 +32,23 @@
 .humidity-paper {
   justify-content: center;
   flex-direction: column;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 5px 10px 5px;
   min-height: 100px;
+  width: 50%;
   border-radius: 10px 0px 0px 10px;
-  /* background-color: #a5bbdd; */
-  background: linear-gradient(#1d256e, #1d5372, #1a4874);
+  text-align: center;
+  /* background: linear-gradient(#1d256e, #1d5372, #1a4874); */
   position: relative;
 }
 .wind-paper {
   justify-content: center;
   flex-direction: column;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 5px 10px 5px;
   min-height: 100px;
+  width: 50%;
   border-radius: 0px 10px 10px 0px;
-  /* background-color: #a5bbdd; */
-  background: linear-gradient(#1d256e, #1d5372, #1a4874);
+  text-align: center;
+  /* background: linear-gradient(#1d256e, #1d5372, #1a4874); */
   position: relative;
 }
 .temp-display {

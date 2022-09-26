@@ -84,6 +84,7 @@ export interface DailyForeCastResponse {
   cnt: string;
   list: {
     dt: string;
+    dt_txt: string;
     main: {
       temp: string;
       feels_like: string;
@@ -114,7 +115,6 @@ export interface DailyForeCastResponse {
     sys: {
       pod: string;
     };
-    dt_text: string;
   }[];
 }
 
@@ -123,6 +123,7 @@ export interface DailyForecastCustomizedResponse {
   humidity: string;
   temp_min: string;
   temp_max: string;
+  datetime: string;
   wind: {
     speed: string;
     deg: string;

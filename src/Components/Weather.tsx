@@ -58,9 +58,6 @@ export default function Weather() {
       skip: dailySkip,
     }
   );
-  const [dailyForecast, setDailyForecast] = useState(
-    {} as DailyForeCastResponse
-  );
   const cityMenuAnchor = useAppSelector(
     (state) => state.cityMenuSlice.anchorForCityMenu
   );
@@ -135,23 +132,29 @@ export default function Weather() {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item xs={6} md={2} className="weather-paper-container">
-          <Paper className="weather-paper humidity-paper">
+        <Grid item xs={6} md={2} className="wind-hum-container">
+          <Paper
+            className={"weather-paper humidity-paper " + weatherConditionClass}
+          >
             {!getDailyForecastData.isSuccess ? (
               <LoadingSpinner isShowText={false} />
-            ) : null}
-            <DropIcon />
+            ) : (
+              <DropIcon />
+            )}
             <Typography className="main-humidity-show-text">
               {NumToPersian(currentWeather?.humidity)} %
             </Typography>
           </Paper>
-          <Paper className="weather-paper wind-paper">
+          <Paper
+            className={"weather-paper wind-paper " + weatherConditionClass}
+          >
             {!getDailyForecastData.isSuccess ? (
               <LoadingSpinner isShowText={false} />
-            ) : null}
-            <WindIcon />
-            <Typography className="main-humidity-show-text">
-              {NumToPersian(currentWeather?.humidity)} %
+            ) : (
+              <WindIcon />
+            )}
+            <Typography variant="body2" className="main-humidity-show-text">
+              {NumToPersian(currentWeather?.wind.speed)} km/h
             </Typography>
           </Paper>
         </Grid>

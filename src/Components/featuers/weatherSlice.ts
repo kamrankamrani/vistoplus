@@ -52,12 +52,13 @@ const weatherSlice = createSlice({
       action: PayloadAction<DailyForecastCustomizedResponse[]>
     ) {
       state.dailyForecast = action.payload.map((val) => {
-        const data_ = {
+        const data_: DailyForecastCustomizedResponse = {
           ...val,
           temp: val.temp,
           temp_max: val.temp_max,
           temp_min: val.temp_min,
           humidity: val.humidity,
+          datetime: val.datetime,
           wind: {
             speed: val.wind.speed,
             deg: val.wind.deg,
