@@ -1,3 +1,4 @@
+import { WeatherStatusCode } from "../../../Info/Config";
 import "../../../Styles/WeatherElement/weather-element.css";
 import { useAppSelector } from "../../reduxHooks";
 export function WeatherElement() {
@@ -7,9 +8,13 @@ export function WeatherElement() {
 
   return (
     <>
-      {currentWeather === "sunny" ? <span className="sun"></span> : null}
-      {currentWeather === "cloudy" ? <span className="cloud"></span> : null}
-      {currentWeather === "rainy" ? (
+      {currentWeather === WeatherStatusCode.sunny ? (
+        <span className="sun"></span>
+      ) : null}
+      {currentWeather === WeatherStatusCode.cloud ? (
+        <span className="cloud"></span>
+      ) : null}
+      {currentWeather === WeatherStatusCode.rain ? (
         <>
           <ul className="ul-rainy-element">
             <li></li>
@@ -21,7 +26,7 @@ export function WeatherElement() {
           <span className="rainy"></span>
         </>
       ) : null}
-      {currentWeather === "snow" ? (
+      {currentWeather === WeatherStatusCode.snow ? (
         <>
           <ul className="ul-snow-element">
             <li></li>
@@ -36,7 +41,7 @@ export function WeatherElement() {
           <span className="snow"></span>
         </>
       ) : null}
-      {currentWeather === "clear" ? (
+      {currentWeather === WeatherStatusCode.clear ? (
         <>
           <ul className="night">
             <li></li>
@@ -45,7 +50,7 @@ export function WeatherElement() {
             <li></li>
             <li></li>
           </ul>
-          <span className="moon"></span>{" "}
+          <span className="moon-element"></span>{" "}
         </>
       ) : null}
     </>

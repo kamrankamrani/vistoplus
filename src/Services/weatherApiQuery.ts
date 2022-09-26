@@ -27,9 +27,11 @@ export const weatherApi = createApi({
       transformResponse: (
         response: CurrentWeatherResponse
       ): CurrentWeatherCustomizedResponse => {
+        console.log("weather raw is ", response);
         const formedRes: CurrentWeatherCustomizedResponse = {
           temp: response.main.temp,
           humidity: response.main.humidity,
+          weatherStatus: response.weather[0].main,
           wind: {
             speed: response.wind.speed,
             deg: response.wind.deg,

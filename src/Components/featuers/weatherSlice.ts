@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { WeatherStatusCode } from "../../Info/Config";
 import {
   CurrentWeatherCustomizedResponse,
   DailyForecastCustomizedResponse,
@@ -39,6 +40,7 @@ const weatherSlice = createSlice({
         ...state.currentWeather,
         temp: action.payload.temp,
         humidity: action.payload.humidity,
+        weatherStatus: action.payload.weatherStatus,
         wind: {
           speed: action.payload.wind.speed,
           deg: action.payload.wind.deg,
@@ -65,19 +67,37 @@ const weatherSlice = createSlice({
       });
     },
     changeWeatherConditionClass(state, action: PayloadAction<string>) {
-      if (action.payload === "sunny") {
-        state.weatherCondition = action.payload;
-        state.weatherConditionClass = "sunny-background";
-      } else if (action.payload === "snow") {
-        state.weatherConditionClass = "snow-background";
-      } else if (action.payload === "clear") {
-        state.weatherConditionClass = "clear-background";
-      } else if (action.payload === "cloudy") {
-        state.weatherConditionClass = "cloudy-background";
-      } else if (action.payload === "rainy") {
-        state.weatherConditionClass = "rainy-background";
+      let isDay = true;
+      const date_ = new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Tehran",
+      });
+      if (new Date(date_).getHours() > 18) {
+        isDay = false;
       }
-      state.weatherCondition = action.payload;
+      if (action.payload.indexOf("sun") >= 0) {
+        state.weatherConditionClass = "sunny-background";
+        state.weatherCondition = WeatherStatusCode.sunny;
+      } else if (action.payload.indexOf("snow") >= 0) {
+        state.weatherConditionClass = "snow-background";
+        state.weatherCondition = WeatherStatusCode.snow;
+      } else if (action.payload.indexOf("clear") >= 0) {
+        if (!isDay) {
+          state.weatherConditionClass = "clear-background";
+          state.weatherCondition = WeatherStatusCode.clear;
+        } else {
+          state.weatherConditionClass = "sunny-background";
+          state.weatherCondition = WeatherStatusCode.sunny;
+        }
+      } else if (action.payload.indexOf("cloud") >= 0) {
+        state.weatherConditionClass = "cloudy-background";
+        state.weatherCondition = WeatherStatusCode.cloud;
+      } else if (
+        action.payload.indexOf("rain") >= 0 ||
+        action.payload.indexOf("extrem") >= 0
+      ) {
+        state.weatherConditionClass = "rainy-background";
+        state.weatherCondition = WeatherStatusCode.rain;
+      }
     },
   },
 });

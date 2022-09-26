@@ -28,11 +28,13 @@ export default function Weather() {
   const weatherConditionClass = useAppSelector(
     (state) => state.weatherSlice.weatherConditionClass
   ); //sunny cloudy rainy clear snow
-  const currentWeather = useAppSelector((state) => state.weatherSlice);
+  const currentWeather = useAppSelector(
+    (state) => state.weatherSlice.currentWeather
+  );
   const dispatch = useAppDispatch();
   const [getGeoCodeSkip, setGetGeoCodeSkip] = useState(true);
-  const [currentWeatherSkip, setCurrentWeatherSkip] = useState(true);
-  const [dailySkip, setDailySkip] = useState(true);
+  const [currentWeatherSkip, setCurrentWeatherSkip] = useState(false);
+  const [dailySkip, setDailySkip] = useState(false);
   const getGeoCodeData = useGetGeoCodeQuery(City, {
     skip: getGeoCodeSkip,
   });
@@ -62,11 +64,14 @@ export default function Weather() {
   );
 
   useEffect(() => {
-    const w_ = "clear";
-    setTimeout(() => {
-      dispatch(changeWeatherConditionClass(w_));
-    }, 1000);
-  }, []);
+    if (currentWeather !== undefined) {
+      dispatch(
+        changeWeatherConditionClass(
+          currentWeather.weatherStatus.toLocaleLowerCase()
+        )
+      );
+    }
+  }, [currentWeather?.weatherStatus]);
 
   const handleCityMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     if (!cityMenuAnchor) {
@@ -76,7 +81,7 @@ export default function Weather() {
   };
 
   useEffect(() => {
-    console.log("geo code data is ", getGeoCodeData.data);
+    // console.log("geo code data is ", getGeoCodeData.data);
   }, [getGeoCodeData.data]);
 
   useEffect(() => {
@@ -103,7 +108,7 @@ export default function Weather() {
             <WeatherElement />
             <Grid container className="temp-display">
               <Typography className="main-temp-show-text">
-                {NumToPersian(currentWeather.currentWeather?.temp)}&deg;
+                {NumToPersian(currentWeather?.temp)}&deg;
               </Typography>
               <Typography className="degree-sign-text" variant="caption">
                 C
@@ -128,7 +133,7 @@ export default function Weather() {
         <Grid item xs={6} md={2} className="weather-paper-container">
           <Paper className="weather-paper humidity-paper">
             <Typography className="main-humidity-show-text">
-              {NumToPersian(currentWeather.currentWeather?.humidity)} %
+              {NumToPersian(currentWeather?.humidity)} %
             </Typography>
           </Paper>
         </Grid>

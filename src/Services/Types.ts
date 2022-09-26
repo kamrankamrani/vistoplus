@@ -24,7 +24,7 @@ export interface GeoCodingResponse {
 
 export interface CurrentWeatherResponse {
   coord: { lon: string; lat: string };
-  weather: { id: string; main: string; description: string; icon: string };
+  weather: { id: string; main: string; description: string; icon: string }[];
   base: string;
   main: {
     temp: string;
@@ -61,6 +61,7 @@ export interface CurrentWeatherResponse {
 export interface CurrentWeatherCustomizedResponse {
   temp: string;
   humidity: string;
+  weatherStatus: string;
   wind: {
     speed: string;
     deg: string;
