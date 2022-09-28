@@ -1,12 +1,12 @@
 import { Grid, IconButton } from "@mui/material";
 import "../Styles/BottomBar/bottom-bar.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useContext, useEffect, useState } from "react";
-import DarkModeContext from "./DarkModeContext";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "./reduxHooks";
 
 export default function BottomBar() {
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
   const [renderBackButton, setRenderBackButton] = useState(false);
   const currentLocation = useLocation();
   const navigate = useNavigate();

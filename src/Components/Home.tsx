@@ -32,7 +32,7 @@ export default function Home() {
         <Grid item xs={6} sm={4} className="item-container">
           <Paper
             onClick={() => handleItemClick("uselessitem")}
-            className="paper"
+            className={"paper " + (theme === "dark" ? "dark-home-paper " : "")}
           >
             <Grid
               className={
@@ -62,7 +62,7 @@ export default function Home() {
         <Grid item xs={6} sm={4} className="item-container">
           <Paper
             onClick={() => handleItemClick("onlineconsult")}
-            className="paper"
+            className={"paper " + (theme === "dark" ? "dark-home-paper " : "")}
           >
             <Grid
               className={
@@ -90,7 +90,10 @@ export default function Home() {
           )}
         </Grid>
         <Grid item xs={6} sm={4} className="item-container">
-          <Paper onClick={() => handleItemClick("weather")} className="paper">
+          <Paper
+            onClick={() => handleItemClick("weather")}
+            className={"paper " + (theme === "dark" ? "dark-home-paper " : "")}
+          >
             <Grid
               className={
                 "weather " + (theme === "dark" ? "dark-item-container" : "")

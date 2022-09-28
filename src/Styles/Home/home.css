@@ -45,17 +45,18 @@
   border-radius: 10px;
   width: 150px;
   height: 150px;
-  background-color: #b0bec5;
+  background-color: #f1f1f1;
+  border: solid 1px #424242;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-size 0.2s ease;
 }
-.paper:hover .useless-facts {
+.paper:hover :not(h5) {
   -webkit-filter: blur(4px);
   filter: blur(4px);
 }
-.paper:hover .online-consultant {
+/* .paper:hover .online-consultant {
   -webkit-filter: blur(4px);
   filter: blur(4px);
   background-size: 100%;
@@ -63,12 +64,12 @@
 .paper:hover .weather {
   -webkit-filter: blur(4px);
   filter: blur(4px);
-}
+} */
 .paper > h5 {
   position: absolute;
-  top: 40%;
+  top: 70%;
   display: none;
-  color: #ffffff;
+  color: #424242;
   font-size: 18px;
   font-weight: bold;
   z-index: 9999999;
@@ -106,21 +107,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #b0bec5;
+  /* background-color: #b0bec5; */
+  background-color: #f1f1f1;
+  border: solid 1px #424242;
   transition: background-size 0.2s ease;
 }
 .weather {
   border-radius: 10px;
   width: 150px;
   height: 150px;
-  background-color: #b0bec5;
+  /* background-color: #b0bec5; */
+  background-color: #f1f1f1;
+  border: solid 1px #424242;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: background-size 0.2s ease;
 }
+.dark-home-paper {
+  border: solid 5px #eeeeee;
+}
 .dark-item-container {
-  background-color: #bb86fc;
+  background-color: #686565;
+  border: none;
 }
 .light-icon {
   color: #424242;

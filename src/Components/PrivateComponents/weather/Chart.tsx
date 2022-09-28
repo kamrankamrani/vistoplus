@@ -31,6 +31,7 @@ export default function Chart() {
   const [minTempPixels, setMinTempPixels] = useState([] as number[]);
   const foreCastData: DailyForecastCustomizedResponse[] | undefined =
     useAppSelector((state) => state.weatherSlice.dailyForecast);
+  const theme = useAppSelector((state) => state.darkMode.value);
 
   useEffect(() => {
     if (foreCastData) {
@@ -116,7 +117,11 @@ export default function Chart() {
             ? foreCastData.map((val, index) => {
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
-                    <NightlightRoundedIcon className="moon" />
+                    <NightlightRoundedIcon
+                      className={
+                        "moon " + (theme === "dark" ? "dark-moon" : "")
+                      }
+                    />
                   </Grid>
                 );
               })
@@ -131,7 +136,13 @@ export default function Chart() {
                 // console.log("date is ", val.datetime);
                 return (
                   <Grid key={index} item className="single-icon-wrapper">
-                    <Typography className="date-text" variant="caption">
+                    <Typography
+                      className={
+                        "date-text " +
+                        (theme === "dark" ? "dark-date-text" : "")
+                      }
+                      variant="caption"
+                    >
                       {NumToPersian(`${d_}:00`)}
                     </Typography>
                   </Grid>

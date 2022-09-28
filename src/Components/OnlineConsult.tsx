@@ -9,7 +9,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import InfoDialog from "./InfoDialog";
 import "../Styles/OnlineConsult/online-consult.css";
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import DotsProgress from "./PrivateComponents/OnlineConsult/DotsProgress";
 import FormState, {
   OnlineConsultFromDateType,
@@ -18,7 +18,7 @@ import ResponseOnlineConsultForm, {
   returnResultData,
 } from "./PrivateComponents/OnlineConsult/ResonseForm";
 import ConsultResult from "./PrivateComponents/OnlineConsult/ConsultResult";
-import DarkModeContext from "./DarkModeContext";
+import { useAppSelector } from "./reduxHooks";
 const MAX_FROM_STEP = 4; //start from zero
 
 export default function OnlineConsult() {
@@ -26,8 +26,7 @@ export default function OnlineConsult() {
   const [formData, setFormData] = useState({} as OnlineConsultFromDateType);
   const [hideResult, setHideResult] = useState(true);
   const [formResult, setFromResult] = useState({} as returnResultData);
-  const [theme] = useContext(DarkModeContext);
-
+  const theme = useAppSelector((state) => state.darkMode.value);
   const handleOpenDialog = () => {
     setOpenDialog(true);
   };

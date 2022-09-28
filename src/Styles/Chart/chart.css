@@ -20,6 +20,10 @@
   transform: rotate(-45deg);
 }
 
+.dark-moon {
+  color: #eeeeee;
+}
+
 .chart-wrapper {
   display: flex;
   justify-content: space-between;
@@ -76,4 +80,8 @@
   font-family: Vazirmatn, sans-serif;
   font-weight: bold;
   color: #353535;
+}
+
+.dark-date-text {
+  color: #eeeeee;
 }

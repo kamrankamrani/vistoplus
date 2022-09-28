@@ -1,9 +1,8 @@
 import { Button, Grid, Paper, Tooltip, Typography } from "@mui/material";
 import "../Styles/UselessFacts/uselessFactsStyles.css";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
-import DarkModeContext from "./DarkModeContext";
 import LoadingComponent from "./LoadingComponent";
 import LangSelect from "./LangSelect";
 import { setEnglishFact, setPersianValue } from "./featuers/uselessFactSlice";
@@ -19,7 +18,7 @@ export default function UseLessFacts() {
   const EnFact = useAppSelector((state) => state.uselessFact.englishFact);
   const DefaultLightIconColor = "#f1f1f1";
   const [lang, setLang] = useState("fa");
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
   const dispatch = useAppDispatch();
   const EngFactFromQuery = useGetRandomFactQuery(undefined, {
     skip: enFactskip,

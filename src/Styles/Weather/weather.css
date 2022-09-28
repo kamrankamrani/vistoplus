@@ -130,3 +130,10 @@
     rgba(33, 33, 33, 1) 90%
   );
 }
+
+.dark-weather-paper {
+  background: #43c6ac;
+  background: -webkit-linear-gradient(to right, #191654, #43c6ac);
+  background: linear-gradient(to right, #191654, #43c6ac);
+  box-shadow: rgba(248, 248, 248, 0.35) 0px 0px 15px;
+}

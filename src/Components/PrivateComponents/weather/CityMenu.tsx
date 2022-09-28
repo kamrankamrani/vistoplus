@@ -27,10 +27,7 @@ export default function CityMenu() {
       }
       onClose={(e: React.MouseEvent<HTMLElement>) => handleCloseCityMenu(e)}
     >
-      <MenuItem>City</MenuItem>
-      <MenuItem>City</MenuItem>
-      <MenuItem>City</MenuItem>
-      <MenuItem>City</MenuItem>
+      <MenuItem>Tehran</MenuItem>
     </Menu>
   );
 }

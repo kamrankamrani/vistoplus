@@ -2,7 +2,6 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import "../Styles/Weather/weather.css";
 import { useEffect, useState } from "react";
-import { DailyForeCastResponse } from "../Services/Types";
 import Chart from "./PrivateComponents/weather/Chart";
 import CityMenu from "./PrivateComponents/weather/CityMenu";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
@@ -27,12 +26,15 @@ export default function Weather() {
   const LAT = useAppSelector((state) => state.weatherSlice.lat);
   const LON = useAppSelector((state) => state.weatherSlice.lon);
   const City = useAppSelector((state) => state.weatherSlice.city);
+  const theme = useAppSelector((state) => state.darkMode.value);
+
   const weatherConditionClass = useAppSelector(
     (state) => state.weatherSlice.weatherConditionClass
   ); //sunny cloudy rainy clear snow
   const currentWeather = useAppSelector(
     (state) => state.weatherSlice.currentWeather
   );
+
   const dispatch = useAppDispatch();
   const [getGeoCodeSkip, setGetGeoCodeSkip] = useState(true);
   const [currentWeatherSkip, setCurrentWeatherSkip] = useState(false);
@@ -40,6 +42,7 @@ export default function Weather() {
   const getGeoCodeData = useGetGeoCodeQuery(City, {
     skip: getGeoCodeSkip,
   });
+
   const getCurrentWeatherData = useGetCurrentWeatherQuery(
     {
       lat: LAT,
@@ -159,7 +162,11 @@ export default function Weather() {
           </Paper>
         </Grid>
         <Grid item xs={12} md={8} className="weather-paper-container">
-          <Paper className="weather-paper">
+          <Paper
+            className={
+              "weather-paper " + (theme === "dark" ? "dark-weather-paper " : "")
+            }
+          >
             {!getDailyForecastData.isSuccess ? (
               <LoadingSpinner isShowText={true} />
             ) : null}
