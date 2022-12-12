@@ -2,13 +2,12 @@ import { Chip, Divider, Grid, Typography } from "@mui/material";
 import PlaylistAddCheckRoundedIcon from "@mui/icons-material/PlaylistAddCheckRounded";
 import TaskRoundedIcon from "@mui/icons-material/TaskRounded";
 import ReportGmailerrorredRoundedIcon from "@mui/icons-material/ReportGmailerrorredRounded";
-import "../../../Styles/OnlineConsult/online-consult.css";
 import { returnResultData } from "./ResonseForm";
-import DarkModeContext from "../../DarkModeContext";
-import { useContext } from "react";
+import { useAppSelector } from "../../reduxHooks";
+import "../../../Styles/OnlineConsult/online-consult.css";
 
 export default function ConsultResult(formResult: returnResultData) {
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
   return (
     <Grid item className="result-container">
       <Grid container className="result-body-container">

@@ -98,6 +98,14 @@ const weatherSlice = createSlice({
       ) {
         state.weatherConditionClass = "rainy-background";
         state.weatherCondition = WeatherStatusCode.rain;
+      } else {
+        if (!isDay) {
+          state.weatherConditionClass = "clear-background";
+          state.weatherCondition = WeatherStatusCode.clear;
+        } else {
+          state.weatherConditionClass = "sunny-background";
+          state.weatherCondition = WeatherStatusCode.sunny;
+        }
       }
     },
   },

@@ -2,11 +2,11 @@
   "name": "vistoplus",
   "version": "1.0.0",
   "description": "plus.visto.ir",
-  "main": "index.js",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "dev": "parcel public/index.html",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
+    "build": "parcel build public/index.html",
     "typecheck": "tsc --noEmit"
   },
   "author": "",

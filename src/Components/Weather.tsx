@@ -1,6 +1,5 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import "../Styles/Weather/weather.css";
 import { useEffect, useState } from "react";
 import Chart from "./PrivateComponents/weather/Chart";
 import CityMenu from "./PrivateComponents/weather/CityMenu";
@@ -21,6 +20,7 @@ import { NumToPersian } from "../Services/ConvertNum";
 import { WeatherElement } from "./PrivateComponents/weather/WeatherElement";
 import WindIcon from "./PrivateComponents/weather/WindIcon";
 import DropIcon from "./PrivateComponents/weather/DropIcon";
+import "../Styles/Weather/weather.css";
 
 export default function Weather() {
   const LAT = useAppSelector((state) => state.weatherSlice.lat);
@@ -83,7 +83,7 @@ export default function Weather() {
   };
 
   useEffect(() => {
-    // console.log("geo code data is ", getGeoCodeData.data);
+    console.log("geo code data is ", getGeoCodeData.data);
   }, [getGeoCodeData.data]);
 
   useEffect(() => {

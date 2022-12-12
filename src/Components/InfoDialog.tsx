@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import "../Styles/InfoDialog/info-dialog.css";
-import DarkModeContext from "./DarkModeContext";
+import { useAppSelector } from "./reduxHooks";
 
 interface IProps {
   open: boolean;
@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(
 
 export default function InfoDialog(IProps: IProps) {
   const [open, setOpen] = useState(false);
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
 
   useEffect(() => {
     if (IProps.open) {

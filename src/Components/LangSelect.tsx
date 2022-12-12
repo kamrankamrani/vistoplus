@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@mui/material";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { useAppSelector } from "./reduxHooks";
 import "../Styles/LangSelect/lang-select.css";
-import DarkModeContext from "./DarkModeContext";
 
 interface IProps {
   setLang: React.Dispatch<string>;
@@ -9,7 +9,7 @@ interface IProps {
 
 export default function LangSelect(IProps: IProps) {
   const [lang, setLang] = useState("fa");
-  const [theme] = useContext(DarkModeContext);
+  const theme = useAppSelector((state) => state.darkMode.value);
   const handleElClick = (input: string) => {
     if (input === "fa") {
       setLang("fa");

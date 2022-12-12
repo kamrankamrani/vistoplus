@@ -15,26 +15,36 @@ import { useContext, useEffect, useState } from "react";
 import IS_smScreen from "./Screen";
 import { useAppDispatch, useAppSelector } from "./reduxHooks";
 import { setDarkMode } from "./featuers/darkModeSlice";
+import { useNavigate } from "react-router-dom";
 
 const StaticAppBar = () => {
   const isSmScreen = useContext(IS_smScreen());
-  const [switchValue, setSwitchValue] = useState(false);
+  const [switchValue, setSwitchValue] = useState(true);
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.darkMode.value);
-  // const [theme, setTheme] = useContext(DarkModeContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (switchValue) {
       dispatch(setDarkMode("dark"));
-      // setTheme("dark");
     } else {
       dispatch(setDarkMode("light"));
-      // setTheme("light");
     }
   }, [switchValue]);
 
   const handleSwitchClick = () => {
     setSwitchValue(!switchValue);
+  };
+
+  const handleAppbarClick = (value: string) => {
+    switch (value) {
+      case "home":
+        navigate("/");
+        break;
+      default:
+        navigate("#");
+        break;
+    }
   };
 
   return (
@@ -49,12 +59,13 @@ const StaticAppBar = () => {
           checkedIcon={
             <DarkModeRoundedIcon sx={{ fontSize: "20px", color: "#fff" }} />
           }
+          checked={switchValue}
         />
         <Grid container>
           <Grid item className="menu-option-container">
             {isSmScreen && (
               <>
-                <Button>
+                <Button onClick={() => handleAppbarClick("home")}>
                   <Typography
                     variant="h6"
                     component="div"
@@ -63,7 +74,7 @@ const StaticAppBar = () => {
                     خانه
                   </Typography>
                 </Button>
-                <Button>
+                <Button onClick={() => handleAppbarClick("about")}>
                   <Typography
                     variant="h6"
                     component="div"
@@ -72,7 +83,7 @@ const StaticAppBar = () => {
                     درباره ویستو پلاس
                   </Typography>
                 </Button>
-                <Button>
+                <Button onClick={() => handleAppbarClick("idea")}>
                   <Typography
                     variant="h6"
                     component="div"

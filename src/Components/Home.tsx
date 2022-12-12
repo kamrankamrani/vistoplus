@@ -11,7 +11,6 @@ import { useAppSelector } from "./reduxHooks";
 export default function Home() {
   const isSmScreen = useContext(IS_smScreen());
   const theme = useAppSelector((state) => state.darkMode.value);
-  // const [theme] = useContext(DarkModeContext);
   const navigate = useNavigate();
 
   const handleItemClick = (element: string) => {
