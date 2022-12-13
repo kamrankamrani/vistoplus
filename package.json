@@ -2,6 +2,7 @@
   "name": "vistoplus",
   "version": "1.0.0",
   "description": "plus.visto.ir",
+  "source": "src/index.tsx",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "dev": "parcel public/index.html",
@@ -31,15 +32,25 @@
     "process": "^0.11.10",
     "typescript": "^4.7.4"
   },
-  "browserslist": [
-    "last 2 Chrome versions"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 firefox version",
+      "last 2 safari version"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "@swc/helpers": "^0.4.14",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
