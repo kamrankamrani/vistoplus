@@ -2,7 +2,7 @@
 
 #### you can visit this page here:
 
-[https://plus.visto.ir](https://www.plus.visto.ir)
+[https://plus.visto.ir](https://plus.visto.ir)
 
 
 ### Tech Stack:
