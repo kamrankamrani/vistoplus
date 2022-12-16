@@ -2,7 +2,7 @@
 
 #### you can visit this page here:
 
-[https://plus.visto.ir](https://plus.www.visto.ir)
+[https://plus.visto.ir](https://www.plus.visto.ir)
 
 
 ### Tech Stack:
@@ -33,6 +33,8 @@ Weather is tried to be super cool with css and animations.
 And third part is you can get a online free consultant about take caring of your irrigation model of your plants.
 
 The consultant part is came from my experience talking and consulting our customers. Also this idea is very crude for now.
+
+This website is using redux for dark/light mode!
 
 ### Contact:
 
